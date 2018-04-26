@@ -1,0 +1,608 @@
+
+QUESTION 4
+
+a)
+****************************************
+Report : area
+Design : alu
+Version: L-2016.03-SP2
+Date   : Thu Apr 19 20:30:55 2018
+****************************************
+
+Information: Updating design information... (UID-85)
+Library(s) Used:
+
+    saed90nm_typ (File: /nfs/guille/a1/cadlibs/synop_lib/SAED_EDK90nm/Digital_Standard_Cell_Library/synopsys/models/saed90nm_typ_pg.db)
+
+Number of ports:                           60
+Number of nets:                           164
+Number of cells:                          111
+Number of combinational cells:            108
+Number of sequential cells:                 2
+Number of macros/black boxes:               0
+Number of buf/inv:                         16
+Number of references:                      23
+
+Combinational area:               1203.287011
+Buf/Inv area:                       88.480003
+Noncombinational area:              22.118000
+Macro/Black Box area:                0.000000
+Net Interconnect area:              60.453075
+
+Total cell area:                  1225.405011
+Total area:                       1285.858087
+1
+
+
+b)
+
+****************************************
+Report : hierarchy
+Design : alu
+Version: L-2016.03-SP2
+Date   : Thu Apr 19 11:52:57 2018
+****************************************
+
+alu
+    AND2X1                    saed90nm_typ
+    AND3X1                    saed90nm_typ
+    AND4X1                    saed90nm_typ
+    AO22X1                    saed90nm_typ
+    AO221X1                   saed90nm_typ
+    AO222X1                   saed90nm_typ
+    INVX0                     saed90nm_typ
+    LATCHX1                   saed90nm_typ
+    MUX21X1                   saed90nm_typ
+    NAND2X0                   saed90nm_typ
+    NAND3X0                   saed90nm_typ
+    NOR2X0                    saed90nm_typ
+    NOR3X0                    saed90nm_typ
+    NOR4X0                    saed90nm_typ
+    OA21X1                    saed90nm_typ
+    OA22X1                    saed90nm_typ
+    OAI21X1                   saed90nm_typ
+    OAI22X1                   saed90nm_typ
+    OR2X1                     saed90nm_typ
+    OR4X1                     saed90nm_typ
+    XNOR2X1                   saed90nm_typ
+    XOR2X1                    saed90nm_typ
+    alu_DW01_addsub_0
+        FADDX1                saed90nm_typ
+        XOR2X1                saed90nm_typ
+1
+
+c)
+This took 84 gates
+
+d)
+The alu module was broken down into the following two blocks:
+
+       FADDX1                saed90nm_typ
+       XOR2X1                saed90nm_typ
+The FADDX1 block is to accomplish the adder functions.  The xOR2X1 is to compare the parameter to the opcode.
+
+e)
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : alu
+Version: L-2016.03-SP2
+Date   : Thu Apr 19 11:47:33 2018
+****************************************
+
+Operating Conditions: TYPICAL   Library: saed90nm_typ
+Wire Load Model Mode: enclosed
+
+  Startpoint: opcode[0] (input port)
+  Endpoint: alu_zero (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  alu                8000                  saed90nm_typ
+  alu_DW01_addsub_0  8000                  saed90nm_typ
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  input external delay                     0.00       0.00 f
+  opcode[0] (in)                           0.00       0.00 f
+  U142/QN (INVX0)                          0.13       0.13 r
+  U179/QN (NAND2X0)                        0.09       0.21 f
+  U178/QN (NAND3X0)                        0.37       0.59 r
+  r31/ADD_SUB (alu_DW01_addsub_0)          0.00       0.59 r
+  r31/U9/Q (XOR2X1)                        0.22       0.81 r
+  r31/U1_0/CO (FADDX1)                     0.15       0.95 r
+  r31/U1_1/CO (FADDX1)                     0.13       1.09 r
+  r31/U1_2/CO (FADDX1)                     0.13       1.22 r
+  r31/U1_3/CO (FADDX1)                     0.13       1.35 r
+  r31/U1_4/CO (FADDX1)                     0.13       1.48 r
+  r31/U1_5/CO (FADDX1)                     0.13       1.61 r
+  r31/U1_6/CO (FADDX1)                     0.13       1.75 r
+  r31/U1_7/S (FADDX1)                      0.20       1.94 f
+  r31/SUM[7] (alu_DW01_addsub_0)           0.00       1.94 f
+  U174/Q (AO221X1)                         0.17       2.11 f
+  U177/Q (OR4X1)                           0.13       2.25 f
+  U175/QN (NOR2X0)                         0.04       2.29 r
+  alu_zero (out)                           0.00       2.29 r
+  data arrival time                                   2.29
+  -----------------------------------------------------------
+  (Path is unconstrained)
+
+RTL LEVEL OF WAVEFORM
+*******************************************************************
+CRTE_SNAPSHOT_START
+
+SECTION_CRTE_VERSION
+3.0
+
+SECTION_PID
+27191
+
+SECTION_POLLING_INTERVAL
+5
+
+SECTION_DATE_TIME
+Wed Apr 18 17:00:56 PDT 2018 (1524096056)
+
+SECTION_OS_VERSION
+osname: Linux
+hostname: flip1.engr.oregonstate.edu
+arch: x86_64
+release_version: 3.10.0-693.11.1.el7.x86_64
+
+SECTION_IPC_INFO
+------ Message Queues --------
+key        msqid      owner      perms      used-bytes   messages    
+
+------ Shared Memory Segments --------
+key        shmid      owner      perms      bytes      nattch     status      
+0x30050087 0          root       644        32768      0                       
+0xabbaca01 65537      pchiang    666        4          1                       
+0xabbaca02 98306      pchiang    666        4          1                       
+0x00000000 8192003    xiaob      600        393216     2          dest         
+0x00000000 6291460    gez        600        524288     1          dest         
+0x00000000 27656197   wujing     600        524288     2          dest         
+0x00000000 14188550   wujing     600        524288     2          dest         
+0x00000000 27623431   xiaob      600        524288     2          dest         
+0x00000000 27525128   wujing     600        4194304    2          dest         
+0x00000000 27492363   wujing     600        524288     2         SECTION_ULIMIT
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 385893
+max locked memory       (kbytes, -l) 2048000
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 4096
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) 8192
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 200
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+
+SECTION_SYSCONF
+_SC_THREAD_SAFE_FUNCTIONS= 200809
+_SC_CLK_TCK= 100
+_SC_OPEN_MAX= 4096
+_SC_PAGE_SIZE= 4096
+_SC_ARG_MAX= 2097152
+_SC_CHILD_MAX= 200
+_SC_LINE_MAX= 2048
+
+SECTION_FULL_COMMAND
+/usr/local/apps/synopsys/current_synthesis/linux64/syn/bin/common_shell_exec -shell design_vision -r /usr/local/apps/synopsys/current_synthesis
+
+SECTION_CPUINFO
+total_core: 24
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+model_name:  Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz
+flags:  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm tpr_shadow vnmi flexpriority ept vpid dtherm ida arat
+cpu_family: 6
+core_frequency_mhz: 2659
+core_per_socket: 0
+stepping: 2
+cache_size_kb: 12288
+ht: 0
+
+SECTION_OS_RELEASE_VERSION
+CentOS Linux release 7.4.1708 (Core) 
+
+
+SECTION_QSC_CHECKER
+
+        qscchk.sh Version 1.6.3, 12 November 2014
+        qscchk.dat QSC K Rev: 17, 17 November 2014
+     Copyright (c) 1988-2014 by Synopsys, Inc.
+             All RIGHTS RESERVED
+
+ERROR: This does not appear to be a Synopsys supported Linux variant
+ERROR: Unable to determine Snps_Platform for this operating system.
+ERROR: Unknown Linux variant 'Unknown'
+ 
+No QSC information for the K Synopsys release, on the
+64 bit Unknown platform running the Unknown Operating System 
+could be found in datafile /tmp/sdp_27191_0/qscchk.dat
+ 
+
+Return code from the QSC checker script is 256
+
+SECTION_SYS/VM
+/proc/sys/vm/admin_reserve_kbytes:8192
+/proc/sys/vm/block_dump:0
+/proc/sys/vm/dirty_background_bytes:0
+/proc/sys/vm/dirty_background_ratio:10
+/proc/sys/vm/dirty_bytes:0
+/proc/sys/vm/dirty_expire_centisecs:3000
+/proc/sys/vm/dirty_ratio:20
+/proc/sys/vm/dirty_writeback_centisecs:500
+/proc/sys/vm/drop_caches:0
+/proc/sys/vm/extfrag_threshold:500
+/proc/sys/vm/hugepages_treat_as_movable:0
+/proc/sys/vm/hugetlb_shm_group:0
+/proc/sys/vm/laptop_mode:0
+/proc/sys/vm/legacy_va_layout:0
+/proc/sys/vm/lowmem_reserve_ratio:256	256	32
+/proc/sys/vm/max_map_count:65530
+/proc/sys/vm/memory_failure_early_kill:0
+/proc/sys/vm/memory_failure_recovery:1
+/proc/sys/vm/min_free_kbytes:90112
+/proc/sys/vm/min_slab_ratio:5
+/proc/sys/vm/min_unmapped_ratio:1
+/proc/sys/vm/mmap_min_addr:4096
+/proc/sys/vm/nr_hugepages:0
+/proc/sys/vm/nr_hugepages_mempolicy:0
+/proc/sys/vm/nr_overcommit_hugepages:0
+/proc/sys/vm/nr_pdflush_threads:0
+/proc/sys/vm/numa_zonelist_order:default
+/proc/sys/vm/oom_dump_tasks:1
+/proc/sys/vm/oom_kill_allocating_task:0
+/proc/sys/vm/overcommit_kbytes:0
+/proc/sys/vm/overcommit_memory:0
+/proc/sys/vm/overcommit_ratio:50
+/proc/sys/vm/page-cluster:3
+/proc/sys/vm/panic_on_oom:0
+/proc/sys/vm/percpu_pagelist_fraction:0
+/proc/sys/vm/stat_interval:1
+/proc/sys/vm/swappiness:60
+/proc/sys/vm/user_reserve_kbytes:131072
+/proc/sys/vm/vfs_cache_pressure:100
+/proc/sys/vm/zone_reclaim_mode:0
+
+
+SECTION_SWAP
+swap_partition: /dev/dm-1
+size_gb: 3
+
+CRTE_SNAPSHOT_END
+
+CRTE_PERIODIC_START 1 1524096056401
+
+SECTION_MPSTAT
+total_core: 24
+
+CPU     %user   %kernel %wait   %idle   
+all   16.181723 3.815281 0.099808 79.903183
+0     22.306055 8.041785 0.134530 69.517632
+1     43.944153 12.181922 0.069715 43.804211
+2     20.945992 5.919317 0.149512 72.985176
+3     32.207897 9.916870 0.080344 57.794888
+4     13.954483 3.655448 0.194838 82.195236
+5     14.656696 3.597954 0.105130 81.640221
+6     15.698537 4.091473 0.164029 80.045959
+7     14.417912 3.153587 0.122254 82.306244
+8     20.666883 5.391507 0.166144 73.775467
+9     12.820492 3.085580 0.130006 83.963921
+10     19.353027 4.985930 0.148466 75.512573
+11     12.867663 2.999972 0.127060 84.005310
+12     9.783495 1.596156 0.052369 88.567986
+13     8.376281 1.442267 0.051751 90.129700
+14     10.761872 1.860284 0.033603 87.344238
+15     9.566606 1.919850 0.075333 88.438217
+16     17.025812 2.809700 0.076005 80.088486
+17     12.115183 2.391749 0.083169 85.409904
+18     13.628701 1.915189 0.069420 84.386696
+19     12.437808 2.232523 0.073338 85.256332
+20     12.920149 2.034522 0.125905 84.919426
+21     13.160609 2.286830 0.060420 84.492142
+22     12.525503 1.755409 0.050139 85.668953
+23     12.126164 2.258267 0.052115 85.563454
+
+SECTION_PID_STATUS
+name: common_shell_ex
+state: 1
+vmsize: 1145448
+vmrss: 186672
+vmdata: 644772
+vmstk: 160
+vmexe: 252068
+vmlib: 126444
+threads: 3
+
+SECTION_PROCESS_CPU_UTIL
+pid: 27191
+cpu_total_time: 23377341786
+cpu_used_time: 950
+cpu_p: 
+
+SECTION_SYSTEM_CPU_UTIL
+sys_cpu_p: 
+
+SECTION_MEMINFO
+memtotal: 98821588
+memfree: 49024112
+cached: 8379852
+swapcached: 1197012
+active: 39199560
+swaptotal: 4194300
+swapfree: 8
+
+SECTION_SMAPS
+shared_kb: 47748
+private_kb: 138944
+
+SECTION_DF
+Filesystem  Size  Used Avail Use%
+filesystem        7G  0G  7G    1
+
+Filesystem    Inodes   IUsed   IFree   IUse%
+filesystem          8388608  6724 8381884   4294842740
+
+SECTION_CWD
+Filesystem  Size  Used Avail Use%
+filesystem        14336G  11132G  3203G    78
+
+Filesystem    Inodes   IUsed   IFree   IUse%
+filesystem          1000000000  0 1000000000   0
+
+SECTION_SWAP_RATE
+blk_read: 1676480
+blk_wrtn: 16279320
+swap_in_rate: 
+swap_out_rate: 
+swap_in_rate: 
+swap_out_rate: 
+
+SECTION_FD_SIZE
+files: 17
+total_size: 10060889
+
+SECTION_NET_INTERFACE
+total_eth_avbl: 5
+
+name net_rx_err net_rx_drp net_tx_err net_tx_drp 
+ bond0:         0        4127        0        0
+    lo:         0        0        0        0
+   em1:         0        2968        0        0
+   em4:               0        0        0        0
+   em2:         0        0        0        0
+
+SECTION_NFSSTAT
+readlink: 0
+write: 4
+getattr: 62
+retrans: 0
+raw_data: 
+net 0 0 0 0
+rpc 532129696 7647 532159702
+proc3 22 0 333320932 13730769 25848089 88101971 68153 10856525 25138607 8529161 949230 53565 2785 6415788 361828 2074506 313138 132804 14594417 1462897 100104 50051 2329
+
+
+SECTION_THREAD_CPU_UTIL
+27191 : 27191 (common_shell_ex) R 27186 27186 8476 1083604 27186 4202496 241666 131228 16 3 414 57 129 31 20 0 3 0 975227733 1172938752 46668 18446744073709551615 4194304 262307853 140736339897040 140736339872072 140363658139405 0 0 2101248 1268477695 0 0 0 17 7 0 0 178 0 0 264405008 278042648 793223168 140736339906129 140736339906273 140736339906273 140736339910571 0
+27818 : 27818 (QFileInfoGather) S 27186 27186 8476 1083604 27186 1077944384 45 131228 0 3 0 0 129 31 20 0 3 0 975230614 1172938752 46668 18446744073709551615 4194304 262307853 140736339897040 140363407982080 140363658127685 0 8192 2101248 1268477695 18446744071579849014 0 0 -1 5 0 0 0 0 0 264405008 278042648 793223168 140736339906129 140736339906273 140736339906273 140736339910571 0
+27820 : 27820 (QInotifyFileSys) S 27186 27186 8476 1083604 27186 1077944384 34 131228 0 3 0 0 129 31 20 0 3 0 975230614 1172938752 46668 18446744073709551615 4194304 262307853 140736339897040 140363416374352 140363607685027 0 8192 2101248 1268477695 18446744071581031717 0 0 -1 23 0 0 0 0 0 264405008 278042648 793223168 140736339906129 140736339906273 140736339906273 140736339910571 0
+
+CRTE_PERIODIC_END 1 1524096056401
