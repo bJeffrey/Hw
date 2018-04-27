@@ -12,13 +12,11 @@
 # //  18 U.S.C. Section 1905.
 # //
 # vsim -novopt mult 
-# Start time: 14:44:40 on Apr 26,2018
+# Start time: 21:13:34 on Apr 26,2018
 # ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
 # Loading sv_std.std
 # Loading work.mult
-add wave -r sim:/mult/*
-force a_in 10#14
-force b_in 10#9
+do newSim.do
 quit -f
-# End time: 14:51:58 on Apr 26,2018, Elapsed time: 0:07:18
+# End time: 21:14:21 on Apr 26,2018, Elapsed time: 0:00:47
 # Errors: 0, Warnings: 1

@@ -1,5 +1,3 @@
-#! /bin/env tclsh
-
 read_sverilog  mult.sv
 compile
 report_timing
