@@ -1,7 +1,7 @@
 #@ # 
 #@ # Running dc_shell Version L-2016.03-SP2 for linux64 -- May 30, 2016
-#@ # Date:   Thu Apr 26 21:25:08 2018
-#@ # Run by: noej@flip3.engr.oregonstate.edu
+#@ # Date:   Fri Apr 27 16:59:15 2018
+#@ # Run by: noej@flip1.engr.oregonstate.edu
 #@ 
 
 source /usr/local/apps/synopsys/current_synthesis/admin/setup/.synopsys_dc.setup
@@ -5462,14 +5462,12 @@ source /nfs/stak/users/noej/ece574/Hw/hw3/rtl_src/.synopsys_dc.setup
 #@ 
 #@ # -- End source /nfs/stak/users/noej/ece574/Hw/hw3/rtl_src/.synopsys_dc.setup
 
-source -echo -verbose /nfs/stak/users/noej/ece574/Hw/hw3/rtl_src/syn_mult.tcl
-#@ # -- Starting source /nfs/stak/users/noej/ece574/Hw/hw3/rtl_src/syn_mult.tcl
+source -echo -verbose /nfs/stak/users/noej/ece574/Hw/hw3/rtl_src/syn_mult
+#@ # -- Starting source /nfs/stak/users/noej/ece574/Hw/hw3/rtl_src/syn_mult
 
 #@ read_sverilog  mult.sv
 #@ compile
 #@ report_timing
 #@ report_area
-#@ write -format verilog -hierarchy -output mult.v
-#@ # -- End source /nfs/stak/users/noej/ece574/Hw/hw3/rtl_src/syn_mult.tcl
-
-quit!
+#@ write -format verilog -hierarchy -output mult_verilog.v
+#@ quit!

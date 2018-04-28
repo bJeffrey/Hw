@@ -7,27 +7,79 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-d/nfs/stak/users/noej/ece574/hw3/mult_src
+Z0 d/nfs/stak/users/noej/ece574/hw3/mult_src
+T_opt
+!s110 1524808062
+VhK`X;3_^RReOZ;G<13aMP2
+04 4 4 work mult fast 0
+=1-14feb5d10927-5ae2b97d-ee7cb-6886
+o-quiet -auto_acc_if_foreign -work work
+Z1 tCvgOpt 0
+n@_opt
+OL;O;10.5;63
+R0
 vmult
 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-VDg1SIo80bB@j0V0VzS_@n1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
 r1
 !s85 0
 31
 !i10b 1
-!s100 HhGPUiWHlO=Z11kF5H:4n3
-ISQe3PfZ8<hJbA_RgGTDM`2
+!s100 ;VkndW`fo[QDFVakk6aTT2
+I[zM[ki=iS=Yl0T0NQBU;a2
 !s105 mult_sv_unit
 S1
-d/nfs/stak/users/noej/ece574/Hw/hw3/rtl_src
-w1524781070
+Z3 d/nfs/stak/users/noej/ece574/Hw/hw3/rtl_src
+w1524837940
 8mult.sv
 Fmult.sv
 L0 1
-OL;L;10.5;63
-!s108 1524782780.000000
+Z4 OL;L;10.5;63
+!s108 1524873551.000000
 !s107 mult.sv|
 !s90 mult.sv|
 !i113 0
-o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-tCvgOpt 0
+Z5 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R1
+vmult_DW01_add_0
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 6XB2>oeeLQi;H5DU6BFk`3
+I6K6[;SXWJi>^k`]zILZ_n3
+R3
+Z6 w1524845783
+Z7 8mult_verilog.v
+Z8 Fmult_verilog.v
+L0 8
+R4
+Z9 !s108 1524845783.000000
+Z10 !s107 mult_verilog.v|
+Z11 !s90 mult_verilog.v|
+!i113 0
+R5
+R1
+nmult_@d@w01_add_0
+vmult_DW01_inc_0
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 ]:igjzGjR]]Bb@53AY?_[1
+Ic<50:mXUYUeZjEHB91ISU1
+R3
+R6
+R7
+R8
+L0 82
+R4
+R9
+R10
+R11
+!i113 0
+R5
+R1
+nmult_@d@w01_inc_0

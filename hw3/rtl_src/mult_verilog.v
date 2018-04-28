@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////
 // Created by: Synopsys DC Expert(TM) in wire load mode
 // Version   : L-2016.03-SP2
-// Date      : Fri Apr 27 00:34:03 2018
+// Date      : Fri Apr 27 16:59:20 2018
 /////////////////////////////////////////////////////////////
 
 
@@ -115,7 +115,7 @@ module mult ( reset, clk, a_in, b_in, start, product, done );
          n121, n122, n123, n124, n125;
   wire   [7:0] count;
 
-  mult_DW01_add_0 add_53 ( .A(product[63:32]), .B(a_in), .CI(1'b0), .SUM({N54, 
+  mult_DW01_add_0 add_39 ( .A(product[63:32]), .B(a_in), .CI(1'b0), .SUM({N54, 
         N53, N52, N51, N50, N49, N48, N47, N46, N45, N44, N43, N42, N41, N40, 
         N39, N38, N37, N36, N35, N34, N33, N32, N31, N30, N29, N28, N27, N26, 
         N25, N24, N23}) );

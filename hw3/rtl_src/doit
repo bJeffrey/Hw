@@ -1,0 +1,77 @@
+#!/bin/bash
+
+#Check for correct number of inputs
+if [ "$#" -eq 0 ]; then
+  echo "no module argument given"
+  echo "Usage: doit <module_name>"
+  exit 1
+fi
+
+#if there are list files, delete them
+count=`ls -1 $1.list 2>/dev/null | wc -l`
+if [ $count != 0 ]
+then
+      #prevent accidental positive comparisons
+      for listfiles in `ls $1.list`
+      do
+            rm Rf $listfiles
+            echo "> deleting listfile $listfiles <"
+      done
+fi
+
+#create the work directory if it's not there
+if [ ! -d "work" ]; then
+      echo "> directory work does not exist, creating it now <."
+      vlib work
+fi
+
+#Check if the file exists and exit if it does not
+if [ ! -f $1.sv ]; then
+    echo "File not found!  Exiting..."
+    exit 1
+fi
+vlog $1.sv
+
+#remove any .v files.  They conflict with vsim
+if [ -f *.v ]; then
+      echo "Removing .v files"
+      rm -f *.v
+fi
+
+#check if the .do file exists
+if [ ! -f "newSim.do" ]; then
+      echo "newSim.do not found.  Exiting..."
+      exit 1
+fi
+vsim -novopt $1 -do newSim.do -quiet -c
+
+#move the original
+if [ -f "mult.list" ]; then
+      echo "Moving mult.list to multOriginal.list"
+      mv mult.list multOriginal.list
+fi
+
+#check if syn_mult exists
+ if [ ! -f "syn_mult" ]; then
+       echo "syn_mult not found.  Exiting..."
+       exit 1
+ fi
+echo "Running Design vision with tcl file"
+dc_shell-xg-t -f syn_mult
+
+#run the simulation again with the mult_verilog.
+vsim -novopt $1 -do newSim.do -quiet -c
+
+#If a mult.list file was created from the verilog file,
+#get the difference between mult.list and multOriginal.list
+if [ ! -f "mult.list" ]; then
+      echo "mult.list was not found.  Exiting"
+      exit 1
+fi
+diff mult.list multOriginal.list >| diffreport
+
+if [ ! -s "diff_file" ]; then
+      echo "gate list and rtl list match!"
+else
+      echo "Gate list and rtl list did not match"
+fi
