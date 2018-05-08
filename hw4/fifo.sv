@@ -31,7 +31,15 @@ module fifo(
       //output the memory location pointed to by rdPtr
       always_ff @(posedge rd_clk, negedge reset_n) begin
             if(!reset_n)
-                  data_out = word[0];
+                  //data_out = word[0];
+                  word[0] = 8'h00;
+                  word[1] = 8'h00;
+                  word[2] = 8'h00;
+                  word[3] = 8'h00;
+                  word[4] = 8'h00;
+                  word[5] = 8'h00;
+                  word[6] = 8'h00;
+                  word[7] = 8'h00;
             else if (rd) begin
                   unique case (rdPtr)//All cases of rdPtr are accounted for
                         0:    begin
@@ -65,7 +73,7 @@ module fifo(
                         7:    begin
                               data_out <= word[7];
                               rdPtr <= 3'b000;
-                              //rdToggle = ????
+                              rdToggle = ~rdToggle;
                         end
                   endcase
             end
@@ -75,15 +83,22 @@ module fifo(
       end
 
       //Write to the memory location pointed to by wrPtr
-      always_ff @(posedge rd_clk, negedge reset_n) begin
-            if(!reset_n)
-                  data_out = word[0];
+      always_ff @(posedge wr_clk, negedge reset_n) begin
+            if(!reset_n)//
+                  // data_out = word[0];
+                  word[0] = 8'h00;
+                  word[1] = 8'h00;
+                  word[2] = 8'h00;
+                  word[3] = 8'h00;
+                  word[4] = 8'h00;
+                  word[5] = 8'h00;
+                  word[6] = 8'h00;
+                  word[7] = 8'h00;
             else if (wr) begin
                   unique case (wrPtr)//All cases of wrPtr are accounted for
                         0:    begin
                               word[0] <= data_in;
                               wrPtr <= wrPtr + 3'b001;
-                              rdToggle = 1'b0;
                         end
                         1:    begin
                               word[1] <= data_in;
@@ -113,7 +128,7 @@ module fifo(
                         7:    begin
                               word[7] <= data_in;
                               wrPtr <= 3'b000;
-                              rdToggle = 1'b1;
+                              wrToggle = ~wrToggle;
                         end
                   endcase
             end
