@@ -14,7 +14,7 @@ module fifo(
       input       [7:0] data_in,    //data in
       output reg  [7:0] data_out,   //data output
       output            empty,      //empty flag
-      output            full        //full flag
+      output            full        //full flag..
       );
 
       //declare registers
