@@ -28,18 +28,23 @@ module fifo(
       assign empty = (rdToggle == wrToggle)&&(rdPtr == wrPtr);    //Indicate the memory is empty
       assign full = (rdToggle != wrToggle)&&(rdPtr == wrPtr);     //Indicate the memory is full
 
+      // http://www.verilogpro.com/systemverilog-always_comb-always_ff/
+      // always_comb automatically executes once at time zero,
+      // always_comb is sensitive to changes within the contents of a function
+      // Variables on the left-hand side of assignments within an always_comb procedure,
+            // including variables from the contents of a called function, cannot be written to by any other processes
+      // Statements in an always_comb cannot include those that block,
+            // have blocking timing or event controls, or fork-join statements.
+
       //output the memory location pointed to by rdPtr
       always_ff @(posedge rd_clk, negedge reset_n) begin
-            if(!reset_n)
+            if(!reset_n) begin
                   //data_out = word[0];
-                  word[0] = 8'h00;
-                  word[1] = 8'h00;
-                  word[2] = 8'h00;
-                  word[3] = 8'h00;
-                  word[4] = 8'h00;
-                  word[5] = 8'h00;
-                  word[6] = 8'h00;
-                  word[7] = 8'h00;
+                  rdPtr <= 3'b000;
+                  wrPtr <= 3'b000;
+                  rdToggle <= 1'b0;
+                  wrToggle <= 1'b0;
+            end
             else if (rd) begin
                   unique case (rdPtr)//All cases of rdPtr are accounted for
                         0:    begin
@@ -83,18 +88,8 @@ module fifo(
       end
 
       //Write to the memory location pointed to by wrPtr
-      always_ff @(posedge wr_clk, negedge reset_n) begin
-            if(!reset_n)//
-                  // data_out = word[0];
-                  word[0] = 8'h00;
-                  word[1] = 8'h00;
-                  word[2] = 8'h00;
-                  word[3] = 8'h00;
-                  word[4] = 8'h00;
-                  word[5] = 8'h00;
-                  word[6] = 8'h00;
-                  word[7] = 8'h00;
-            else if (wr) begin
+      always_ff @(posedge wr_clk) begin//reset operator is taken care of in the rd_clock flip-flop
+            if (wr) begin
                   unique case (wrPtr)//All cases of wrPtr are accounted for
                         0:    begin
                               word[0] <= data_in;
