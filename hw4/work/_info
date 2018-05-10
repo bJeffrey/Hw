@@ -10,22 +10,23 @@ cModel Technology
 Z0 d/nfs/stak/users/noej/ece574/Hw/hw4
 vfifo
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z2 VDg1SIo80bB@j0V0VzS_@n1
-r1
-!s85 0
-31
+!s110 1525977108
 !i10b 1
-!s100 79:AQzO0H]eW<8POoiETb3
-IfW?fTBcA_^F?D>8l[joE=2
+!s100 ;QFEP>hz?>4A>@jO<EQVW1
+I6eTF;ZcQAOe7?VR81z3V@0
+Z2 VDg1SIo80bB@j0V0VzS_@n1
 !s105 fifo_sv_unit
 S1
 R0
-w1525914851
+w1525977096
 8fifo.sv
 Ffifo.sv
 L0 8
 Z3 OL;L;10.5;63
-!s108 1525915285.000000
+r1
+!s85 0
+31
+!s108 1525977108.000000
 !s107 fifo.sv|
 !s90 fifo.sv|
 !i113 0

@@ -1,0 +1,2 @@
+To run a good copy of verilog code, invoke the following command:
+a2ps --pretty-print=verilog -o myModule.ps -1 --line-numbers=1 -r --font-size=10 myModule.sv

@@ -23,48 +23,38 @@ module fifo(
       reg rdToggle = 1'b0;          //binary toggle to differentiate between full and empty memory
       reg [2:0] rdPtr = 4'b0000;    //points to the current location in memory to be read
       reg [2:0] wrPtr = 4'b0000;    //points to the current location in memory to be written
-      reg syncEmpty;
-      reg syncFull;
+      reg syncEmpty;                //binary value to synchronize the empty output
+      reg syncFull;                 //binary value to synchronize the full output
 
-      //assign the empty and full outputs
+      //assign the empty and full asynchronous signals
       assign asyncEmpty = (rdToggle == wrToggle)&&(rdPtr == wrPtr);    //Indicate the memory is empty
       assign asyncFull = (rdToggle != wrToggle)&&(rdPtr == wrPtr);     //Indicate the memory is full
 
+      //assign empty and full outputs to high when either async or sync empty/full is high
       assign empty = asyncEmpty | syncEmpty;
       assign full = asyncFull | syncFull;
 
+      //ensure the syncrhonous empty is updated at the beginning of the read clock
       always_ff @(posedge rd_clk) begin
             syncEmpty <= asyncEmpty;
       end
 
+      //ensure the asynchronous full is updeated at the beginning of the write clock
       always_ff@(posedge wr_clk) begin
             syncFull <= asyncFull;
       end
 
-
-       // **********************************************************************************************
-      // Comments from: http://www.verilogpro.com/systemverilog-always_comb-always_ff/
-       // always_comb automatically executes once at time zero,
-       // always_comb is sensitive to changes within the contents of a function
-       // Variables on the left-hand side of assignments within an always_comb procedure,
-             // including variables from the contents of a called function, cannot be written to by any other processes
-       // Statements in an always_comb cannot include those that block,
-             // have blocking timing or event controls, or fork-join statements.
-      // any expression that is written within the always_comb block or within any function called within
-            // the always_comb block is excluded from the implicit sensitivity list.
-      // ************************************************************************************************
-
       //output the memory location pointed to by rdPtr
       always_ff @(posedge rd_clk, negedge reset_n) begin
-            if(!reset_n) begin
-                  //data_out = word[0];
+            if(!reset_n) begin //Handle the reset by resetting the pointers and toggles.
+                               //Memory does not need to be set to zero
                   rdPtr <= 3'b000;
                   wrPtr <= 3'b000;
                   rdToggle <= 1'b0;
                   wrToggle <= 1'b0;
             end
             else if (rd) begin
-                  unique case (rdPtr)//All cases of rdPtr are accounted for
+                  unique case (rdPtr)//use unique case to prevent a latch as all cases of rdPtr are accounted for.
                         0:    begin
                               data_out <= word[0];
                               rdPtr <= rdPtr + 3'b001;
@@ -96,7 +86,7 @@ module fifo(
                         7:    begin
                               data_out <= word[7];
                               rdPtr <= 3'b000;
-                              rdToggle = ~rdToggle;
+                              rdToggle = ~rdToggle;//change toggle value to indicate empty/full
                         end
                   endcase
             end
@@ -108,7 +98,7 @@ module fifo(
       //Write to the memory location pointed to by wrPtr
       always_ff @(posedge wr_clk) begin//reset operator is taken care of in the rd_clock flip-flop
             if (wr) begin
-                  unique case (wrPtr)//All cases of wrPtr are accounted for
+                  unique case (wrPtr)//use unique case to prevent a latch as all cases of wrPtr are accounted for.
                         0:    begin
                               word[0] <= data_in;
                               wrPtr <= wrPtr + 3'b001;
@@ -141,7 +131,7 @@ module fifo(
                         7:    begin
                               word[7] <= data_in;
                               wrPtr <= 3'b000;
-                              wrToggle = ~wrToggle;
+                              wrToggle = ~wrToggle;//change toggle value to indicate empty/full
                         end
                   endcase
             end
@@ -149,40 +139,4 @@ module fifo(
                   //Do nothing
             end
       end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 endmodule
