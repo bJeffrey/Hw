@@ -9,26 +9,48 @@ z2
 cModel Technology
 Z0 d/nfs/stak/users/noej/ece574/Hw/hw4
 vfifo
-DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-!s110 1525557009
-!i10b 1
-!s100 ^Rh`a3cn3aF1o9=MP6Cfd3
-In:`YRYS_If^[7Q9<]ah2H2
-VDg1SIo80bB@j0V0VzS_@n1
-!s105 fifo_sv_unit
-S1
-R0
-w1525557005
-8fifo.sv
-Ffifo.sv
-L0 8
-OL;L;10.5;63
+Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z2 VDg1SIo80bB@j0V0VzS_@n1
 r1
 !s85 0
 31
-!s108 1525557008.000000
+!i10b 1
+!s100 79:AQzO0H]eW<8POoiETb3
+IfW?fTBcA_^F?D>8l[joE=2
+!s105 fifo_sv_unit
+S1
+R0
+w1525914851
+8fifo.sv
+Ffifo.sv
+L0 8
+Z3 OL;L;10.5;63
+!s108 1525915285.000000
 !s107 fifo.sv|
 !s90 fifo.sv|
 !i113 0
-o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-tCvgOpt 0
+Z4 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z5 tCvgOpt 0
+vtb
+R1
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 _?4jYga0YLOE=C[]Oz@Re1
+IM:KWda3n`Yz55]P5@MYjV1
+!s105 tb_sv_unit
+S1
+R0
+w1399508919
+8tb.sv
+Ftb.sv
+L0 9
+R3
+!s108 1525903587.000000
+!s107 tb.sv|
+!s90 tb.sv|
+!i113 0
+R4
+R5

@@ -13,8 +13,8 @@ module fifo(
       input             rd,         //read enable
       input       [7:0] data_in,    //data in
       output reg  [7:0] data_out,   //data output
-      output            empty,      //empty flag
-      output            full        //full flag..
+      output logic      empty,      //empty flag
+      output logic      full        //full flag..
       );
 
       //declare registers
@@ -23,18 +23,36 @@ module fifo(
       reg rdToggle = 1'b0;          //binary toggle to differentiate between full and empty memory
       reg [2:0] rdPtr = 4'b0000;    //points to the current location in memory to be read
       reg [2:0] wrPtr = 4'b0000;    //points to the current location in memory to be written
+      reg syncEmpty;
+      reg syncFull;
 
       //assign the empty and full outputs
-      assign empty = (rdToggle == wrToggle)&&(rdPtr == wrPtr);    //Indicate the memory is empty
-      assign full = (rdToggle != wrToggle)&&(rdPtr == wrPtr);     //Indicate the memory is full
+      assign asyncEmpty = (rdToggle == wrToggle)&&(rdPtr == wrPtr);    //Indicate the memory is empty
+      assign asyncFull = (rdToggle != wrToggle)&&(rdPtr == wrPtr);     //Indicate the memory is full
 
-      // http://www.verilogpro.com/systemverilog-always_comb-always_ff/
-      // always_comb automatically executes once at time zero,
-      // always_comb is sensitive to changes within the contents of a function
-      // Variables on the left-hand side of assignments within an always_comb procedure,
-            // including variables from the contents of a called function, cannot be written to by any other processes
-      // Statements in an always_comb cannot include those that block,
-            // have blocking timing or event controls, or fork-join statements.
+      assign empty = asyncEmpty | syncEmpty;
+      assign full = asyncFull | syncFull;
+
+      always_ff @(posedge rd_clk) begin
+            syncEmpty <= asyncEmpty;
+      end
+
+      always_ff@(posedge wr_clk) begin
+            syncFull <= asyncFull;
+      end
+
+
+       // **********************************************************************************************
+      // Comments from: http://www.verilogpro.com/systemverilog-always_comb-always_ff/
+       // always_comb automatically executes once at time zero,
+       // always_comb is sensitive to changes within the contents of a function
+       // Variables on the left-hand side of assignments within an always_comb procedure,
+             // including variables from the contents of a called function, cannot be written to by any other processes
+       // Statements in an always_comb cannot include those that block,
+             // have blocking timing or event controls, or fork-join statements.
+      // any expression that is written within the always_comb block or within any function called within
+            // the always_comb block is excluded from the implicit sensitivity list.
+      // ************************************************************************************************
 
       //output the memory location pointed to by rdPtr
       always_ff @(posedge rd_clk, negedge reset_n) begin
