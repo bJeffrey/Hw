@@ -13,16 +13,18 @@ module gcd(
       input             reset_n,  //reset
       input             clk,      //clock
       output reg [31:0] result,   //output of GCD engine
-      output reg      done,       //validates output value
+      output reg      done       //validates output value
       );
 
-      reg [31:0] tempA;//temporary register for swapping a_in
-      reg [31:0] tempB;//temporary register for swapping b_in
+      reg [31:0] tempA;//temporary register for swapping aIn
+      reg [31:0] tempB;//temporary register for swapping bIn
+      reg [31:0] aIn;
+      reg [31:0] bIn;
       enum logic [2:0] {
-            IDLE = 3'b00;
-            TEST = 3'b01;
-            SUBTRACT = 3'b10;
-            SWAP = 3'b11;
+            IDLE = 3'b00,
+            TEST = 3'b01,
+            SUBTRACT = 3'b10,
+            SWAP = 3'b11
       } presentState, nextState;//moves through states in the case statement inside always_comb
 
       //Handle reset and move to next state
@@ -36,36 +38,40 @@ module gcd(
       always_comb begin
             unique case (presentState)
                   IDLE: begin
-                        if (start)
+                        if (start) begin
+                              aIn = a_in;
+                              bIn = b_in;
                               nextState = TEST;
+                        end
                         else
                               nextState = IDLE;
                   end
                   TEST: begin
-                        if (a_in < b_in) begin//Use a temp registers to swap A and B.  Done in this state allows the swap state to take 1 cycle
-                              tempA = a_in;
-                              tempB = b_in;
+                        if (aIn < bIn) begin//Use a temp registers to swap A and B.  Done in this state allows the swap state to take 1 cycle
+                              tempA = aIn;
+                              tempB = bIn;
                               nextState = SWAP;
                         end
-                        else if (a_in == 32'd0) begin//Is the gcd a_in?
-                              result = b_in;
+                        else if (aIn == 32'd0) begin//Is the gcd aIn?
+                              result = bIn;
                               nextState = IDLE;
                         end
-                        else if (b_in == 32'd0) begin//Is the gcd b_in?
-                              result = a_in;
+                        else if (bIn == 32'd0) begin//Is the gcd bIn?
+                              result = aIn;
                               nextState = IDLE;
                         end
                         else//Not done finding the gcd and do not need to swap a and b
                               nextState = SUBTRACT;
                   end
                   SUBTRACT: begin
-                        a_in = a_in - b_in;
+                        aIn = aIn - bIn;
                         nextState = TEST;
                   end
                   SWAP: begin
-                        a_in = tempB;
-                        b_in = tempA;
+                        aIn = tempB;
+                        bIn = tempA;
                         nextState = SUBTRACT;
                   end
             endcase
       end
+endmodule
