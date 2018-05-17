@@ -41,6 +41,7 @@ module gcd(
                         if (start) begin
                               aIn = a_in;
                               bIn = b_in;
+                              done = 1'b0;
                               nextState = TEST;
                         end
                         else
@@ -54,10 +55,12 @@ module gcd(
                         end
                         else if (aIn == 32'd0) begin//Is the gcd aIn?
                               result = bIn;
+                              done = 1'b1;
                               nextState = IDLE;
                         end
                         else if (bIn == 32'd0) begin//Is the gcd bIn?
                               result = aIn;
+                              done = 1'b1;
                               nextState = IDLE;
                         end
                         else//Not done finding the gcd and do not need to swap a and b
