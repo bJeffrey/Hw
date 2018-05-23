@@ -15,9 +15,17 @@ module tas(
       output [7:0]      ram_data,         //ram data
       output [10:0]     ram_addr          //ram address
       );
-
+      //inside the smaller inner module (from this top module)
       fifo fifo_0(
-
+            clk_2             (wr_clk),
+            clk_50            (rd_clk),
+            .reset_n          (reset_n),
+            ram_wr_n          (wr),
+            1'b0              (rd),
+            something         (data_in),
+            something         (data_out),
+            something         (empty),
+            something         (full)
       );
 
 

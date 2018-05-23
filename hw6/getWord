@@ -1,0 +1,26 @@
+// *********************************************************
+// Program: getWord.sv
+// Description: identifies when the header has been received
+// Author: Jeffrey Noe
+// Due: 6/01/2018
+// *********************************************************
+
+module getWord(
+      input                   clk_50,           //50 MHz input clock
+      input                   reset_n,          //reset async active low
+      input                   serial_data,      //serial input data
+      input                   data_ena,         //serial data enable
+      output logic [7:0]      out               //write strobe to ram
+      );
+
+      always_ff @(posedge clk_50, negedge reset_n) begin
+            if (!reset_n)
+                  out <= 0;
+            else if (data_ena)
+                  out <= {serial_data,out[7:1]};
+            else begin
+                  //Do nothing
+            end
+      end
+
+endmodule
