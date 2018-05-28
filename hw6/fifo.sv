@@ -18,11 +18,11 @@ module fifo(
       );
 
       //declare registers
-      reg [7:0] word [0:7];         //7:0 memory width per word, 0:7 memory depth (total words)
+      reg [7:0] word [0:3];         //7:0 memory width per word, 0:3 memory depth (total words)
       reg wrToggle = 1'b0;          //binary toggle to differentiate between full and empty memory
       reg rdToggle = 1'b0;          //binary toggle to differentiate between full and empty memory
-      reg [2:0] rdPtr = 4'b0000;    //points to the current location in memory to be read
-      reg [2:0] wrPtr = 4'b0000;    //points to the current location in memory to be written
+      reg [2:0] rdPtr = 2'b00;      //points to the current location in memory to be read
+      reg [2:0] wrPtr = 2'b00;      //points to the current location in memory to be written
       reg syncEmpty;                //binary value to synchronize the empty output
       reg syncFull;                 //binary value to synchronize the full output
 
@@ -48,8 +48,8 @@ module fifo(
       always_ff @(posedge rd_clk, negedge reset_n) begin
             if(!reset_n) begin //Handle the reset by resetting the pointers and toggles.
                                //Memory does not need to be set to zero
-                  rdPtr <= 3'b000;
-                  wrPtr <= 3'b000;
+                  rdPtr <= 2'b00;
+                  wrPtr <= 2'b00;
                   rdToggle <= 1'b0;
                   wrToggle <= 1'b0;
             end
@@ -57,35 +57,19 @@ module fifo(
                   unique case (rdPtr)//use unique case to prevent a latch as all cases of rdPtr are accounted for.
                         0:    begin
                               data_out <= word[0];
-                              rdPtr <= rdPtr + 3'b001;
+                              rdPtr <= rdPtr + 2'b01;
                         end
                         1:    begin
                               data_out <= word[1];
-                              rdPtr <= rdPtr + 3'b001;
+                              rdPtr <= rdPtr + 2'b01;
                         end
                         2:    begin
                               data_out <= word[2];
-                              rdPtr <= rdPtr + 3'b001;
+                              rdPtr <= rdPtr + 2'b01;
                         end
                         3:    begin
                               data_out <= word[3];
-                              rdPtr <= rdPtr + 3'b001;
-                        end
-                        4:    begin
-                              data_out <= word[4];
-                              rdPtr <= rdPtr + 3'b001;
-                        end
-                        5:    begin
-                              data_out <= word[5];
-                              rdPtr <= rdPtr + 3'b001;
-                        end
-                        6:    begin
-                              data_out <= word[6];
-                              rdPtr <= rdPtr + 3'b001;
-                        end
-                        7:    begin
-                              data_out <= word[7];
-                              rdPtr <= 3'b000;
+                              rdPtr <= 2'b00;
                               rdToggle = ~rdToggle;//change toggle value to indicate empty/full
                         end
                   endcase
@@ -101,36 +85,20 @@ module fifo(
                   unique case (wrPtr)//use unique case to prevent a latch as all cases of wrPtr are accounted for.
                         0:    begin
                               word[0] <= data_in;
-                              wrPtr <= wrPtr + 3'b001;
+                              wrPtr <= wrPtr + 2'b01;
                         end
                         1:    begin
                               word[1] <= data_in;
-                              wrPtr <= wrPtr + 3'b001;
+                              wrPtr <= wrPtr + 2'b01;
                         end
                         2:    begin
                               word[2] <= data_in;
-                              wrPtr <= wrPtr + 3'b001;
+                              wrPtr <= wrPtr + 2'b01;
 
                         end
                         3:    begin
                               word[3] <= data_in;
-                              wrPtr <= wrPtr + 3'b001;
-                        end
-                        4:    begin
-                              word[4] <= data_in;
-                              wrPtr <= wrPtr + 3'b001;
-                        end
-                        5:    begin
-                              word[5] <= data_in;
-                              wrPtr <= wrPtr + 3'b001;
-                        end
-                        6:    begin
-                              word[6] <= data_in;
-                              wrPtr <= wrPtr + 3'b001;
-                        end
-                        7:    begin
-                              word[7] <= data_in;
-                              wrPtr <= 3'b000;
+                              wrPtr <= 2'b00;
                               wrToggle = ~wrToggle;//change toggle value to indicate empty/full
                         end
                   endcase
