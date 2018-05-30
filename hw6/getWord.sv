@@ -13,7 +13,8 @@ module getWord(
       output logic [7:0]      word,             //write strobe to ram
       output logic            headerFound       //1 when the word is a5 ro c3.  0 Otherwise
       );
-
+      logic [7:0] tempWord = 0;
+      logic [2:0] count = 0;
       //Indicate when the A5 or C3 header has been headerFound
       //Also will change headerFound to 0 on reset
       always_comb begin
@@ -23,10 +24,16 @@ module getWord(
       always_ff @(posedge clk_50, negedge reset_n) begin
             if (!reset_n)
                   word <= 0;
-            else if (data_ena)
-                  word <= {serial_data,word[7:1]};
+            else if ((data_ena == 1) && (count != 3'b111)) begin//data_ena is high and count doesn't equal 7
+                  tempWord <= {serial_data,tempWord[7:1]};
+                  count <= count + 3'b001;
+            end
+            else if ((data_ena == 1) && (count == 3'b111)) begin //count has been increased 6 times and is now 7.  During this clock cycle, the output is ready
+                  word <= {serial_data,tempWord[7:1]};
+                  count <= 3'b000;
+            end
             else begin
-                  //Do nothing
+                  //do nothing
             end
       end
 

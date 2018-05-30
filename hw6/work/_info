@@ -8,29 +8,76 @@ z2
 !i10f 100
 cModel Technology
 Z0 d/nfs/stak/users/noej/ece574/Hw/hw6
-vgetWord
+vaverager
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
 Z2 VDg1SIo80bB@j0V0VzS_@n1
 r1
 !s85 0
 31
 !i10b 1
-!s100 ]DiISUl7?QRzc91;mjE3Y1
-InDn;MZX:V5Hf4bG]KKoX50
-!s105 getWord_sv_unit
+!s100 gSzHVNc0L>YTUCH_3z0jL0
+Ifgeadcj;J6M8IXIDc`?Xe0
+!s105 averager_sv_unit
 S1
 R0
-w1527474575
-8getWord.sv
-FgetWord.sv
+w1527638019
+8averager.sv
+Faverager.sv
 L0 8
 Z3 OL;L;10.5;63
-!s108 1527474580.000000
-!s107 getWord.sv|
-!s90 getWord.sv|
+!s108 1527638027.000000
+!s107 averager.sv|
+!s90 averager.sv|
 !i113 0
 Z4 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 Z5 tCvgOpt 0
+vcontrol2MHz
+R1
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 go`le`BfABPN_IK4?iNAf0
+I=`FOkJW[V1nPc4__93RU@3
+!s105 control2MHz_sv_unit
+S1
+R0
+w1527619795
+8control2MHz.sv
+Fcontrol2MHz.sv
+L0 8
+R3
+!s108 1527619806.000000
+!s107 control2MHz.sv|
+!s90 control2MHz.sv|
+!i113 0
+R4
+R5
+ncontrol2@m@hz
+vgetWord
+R1
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 A^A;03`]Vl6^HM?cdkXjW1
+I[R0CzE[j^Xf73B;;GiQAj2
+!s105 getWord_sv_unit
+S1
+R0
+w1527632087
+8getWord.sv
+FgetWord.sv
+L0 8
+R3
+!s108 1527632100.000000
+!s107 getWord.sv|
+!s90 getWord.sv|
+!i113 0
+R4
+R5
 nget@word
 vsetHeaderFound
 R1

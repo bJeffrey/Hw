@@ -35,6 +35,6 @@ force data_in 2#1000
 run 100
 force data_in 2#1100
 run 100
-quit -f
+#quit -f
 # End time: 17:13:39 on May 29,2018, Elapsed time: 0:19:22
 # Errors: 0, Warnings: 1

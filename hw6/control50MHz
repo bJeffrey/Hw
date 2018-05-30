@@ -1,0 +1,25 @@
+// *********************************************************
+// Program: control50MHz.sv
+// Description: outputs the write signal for the fifo
+// Author: Jeffrey Noe
+// Due: 6/01/2018
+// *********************************************************
+
+module control50MHz(
+      input                   clk_50,            //2 MHz input clock
+      input                   reset_n,          //reset async active low
+      input                   data_ena,         //from outside.  enables serial write
+      input                   headerFound,      //from getWord, 1 when a5 or c3 has been found
+      output logic            wr                //1 when we must write to the fifo
+      );
+      //handle reset and set wr output high when the header has been found and the data_ena is high
+      always_ff @(posedge clk_50, negedge reset_n) begin
+            if(~reset_n)
+                  wr <= 0;
+            else if (data_ena & headerFound) begin
+                  wr = 1;
+            else
+                  wr <= 0;
+      end
+
+endmodule
