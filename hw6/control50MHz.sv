@@ -18,6 +18,7 @@ module control50MHz(
                   wr <= 0;
             else if (data_ena & headerFound) begin
                   wr = 1;
+            end
             else
                   wr <= 0;
       end

@@ -18,4 +18,6 @@ force serial_data 0
 run 100
 force serial_data 1
 run 100
+force data_ena 0
+run 150
 #quit -f

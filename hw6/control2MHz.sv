@@ -8,23 +8,75 @@
 module control2MHz(
       input                   clk_2,            //2 MHz input clock
       input                   reset_n,          //reset async active low
-      input                   full,             //from fifo to indicate when 4 bytes have been written
       input                   empty,            //from fifo, indicates when the fifo queue is empty
-      output logic            rd                //1 when we have received full signal from the fifo
+      output logic            rd,               //1 when we have received full signal from the fifo
+      output logic	      done,            //1 when we have read 4 bytes from the fifo
+      output logic            clear             //Clear the accumulator
       );
-      reg keepReading = 0;
-      always_ff @(posedge clk_2, negedge reset_n) begin
-            if(!reset_n)
-                  rd <= 0;
-            else if (full | keepReading) begin
-                  if (empty)
-                        keepReading <= 0;
-                  else
-                        keepReading <= 1;
-                  rd <= 1;
-            end
-            else
-                  rd <= 0;
-      end
 
+		enum logic [2:0] {
+			ZERO = 3'b000,
+			BYTE1 = 3'b001,
+			BYTE2 = 3'b010,
+			BYTE3 = 3'b011,
+			BYTE4 = 3'b100
+		} presentState, nextState;
+
+		//Handle reset and move to next state
+		always_ff @(posedge clk_2, negedge reset_n) begin
+			if(!reset_n)
+				presentState <= ZERO;
+			else
+				presentState <= nextState;
+		end
+
+		//Move through the states of the state machine
+      		always_comb begin
+			unique case (presentState)
+				ZERO: begin
+					if(!empty) begin
+						nextState <= BYTE1;
+						rd <= 1;
+					end
+					else
+						nextState <= presentState;
+                              clear <= 1;
+                              done <= 0;
+				end
+				BYTE1: begin
+					if(!empty) begin
+						nextState <= BYTE2;
+						rd <= 1;
+					end
+					else
+						nextState <= presentState;
+                              clear = 0;
+				end
+				BYTE2: begin
+					if(!empty) begin
+						nextState <= BYTE3;
+						rd <= 1;
+					end
+					else
+						nextState <= presentState;
+				end
+				BYTE3: begin
+					if(!empty) begin
+						nextState <= BYTE4;
+						rd <= 1;
+					end
+					else
+						nextState <= presentState;
+				end
+				BYTE4: begin
+					if(!empty) begin
+						done <= 1;
+						nextState <= ZERO;
+						rd <= 1;
+					end
+					else
+						nextState <= presentState;
+				end
+			endcase
+		end
 endmodule

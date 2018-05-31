@@ -81,7 +81,7 @@ module fifo(
 
       //Write to the memory location pointed to by wrPtr
       always_ff @(posedge wr_clk) begin//reset operator is taken care of in the rd_clock flip-flop
-            if (wr) begin
+            if ( (wr == 1) && ((data_in != 8'hA5) || (data_in != 8'hC3))) begin
                   unique case (wrPtr)//use unique case to prevent a latch as all cases of wrPtr are accounted for.
                         0:    begin
                               word[0] <= data_in;

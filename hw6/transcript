@@ -11,30 +11,54 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-# vsim -novopt averager 
-# Start time: 16:54:17 on May 29,2018
+# vsim -novopt tb 
+# Start time: 22:46:54 on May 30,2018
 # ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# Refreshing /nfs/stak/users/noej/ece574/Hw/hw6/work.averager
 # Loading sv_std.std
+# Loading work.tb
+# Loading work.tas
+# Loading work.getWord
+# Loading work.control50MHz
+# Loading work.control2MHz
+# Loading work.fifo
 # Loading work.averager
-add wave sim:/averager/*
-force -freeze sim:/averager/rd_clk 1 0, 0 {1 ns} -r 2
-force -freeze sim:/averager/wr_clk 1 0, 0 {50 ns} -r 100
-force -freeze sim:/averager/rd_clk 1 0, 0 {1 ns} -r 2
-force reset_n 1
-force wr 1
-force data_in 2#1000
-force rd 0
-run 100
-force wr 0
-run 100
-force wr 1
-force data_in 2#1100
-run 100
-force data_in 2#1000
-run 100
-force data_in 2#1100
-run 100
+# Loading work.ramCounter
+add wave -position insertpoint sim:/tb/tas_0/fifo0/*
+run
+# ** Warning: (vsim-3533) [FOFIW] - Failed to open file "vectors/output_data" for writing.
+# No such file or directory. (errno = ENOENT)    : tb.sv(35)
+#    Time: 0 ns  Iteration: 0  Instance: /tb
+# ERROR : Cannot open file output_data
+# ** Warning: (vsim-8315) control2MHz.sv(35): No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Instance: /tb/tas_0/control2MHz0
+# ** Warning: (vsim-8315) control2MHz.sv(35): No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 1  Instance: /tb/tas_0/control2MHz0
+run
+run
+run
+run
+run
+run
+run
+# sending: a5
+run
+run
+# sending: 3a
+run
+run
+# sending: 55
+run
+run
+run
+# sending: 43
+run
+run
+# sending: 3c
+run
+run
+run
+run
+run
 quit -f
-# End time: 17:13:39 on May 29,2018, Elapsed time: 0:19:22
-# Errors: 0, Warnings: 1
+# End time: 22:58:10 on May 30,2018, Elapsed time: 0:11:16
+# Errors: 0, Warnings: 4

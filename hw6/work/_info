@@ -15,22 +15,22 @@ r1
 !s85 0
 31
 !i10b 1
-!s100 gSzHVNc0L>YTUCH_3z0jL0
-Ifgeadcj;J6M8IXIDc`?Xe0
+!s100 b?X61;McfN9HIdOze2?EO0
+II=h4hZXSoNlDVjTXEFlU[1
 !s105 averager_sv_unit
 S1
 R0
-w1527638019
+w1527744164
 8averager.sv
 Faverager.sv
 L0 8
 Z3 OL;L;10.5;63
-!s108 1527638027.000000
-!s107 averager.sv|
-!s90 averager.sv|
+Z4 !s108 1527744967.000000
+Z5 !s107 tb.sv|tas.sv|ramCounter.sv|getWord.sv|fifo.sv|control50MHz.sv|control2MHz.sv|averager.sv|
+Z6 !s90 averager.sv|control2MHz.sv|control50MHz.sv|fifo.sv|getWord.sv|ramCounter.sv|tas.sv|tb.sv|
 !i113 0
-Z4 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-Z5 tCvgOpt 0
+Z7 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z8 tCvgOpt 0
 vcontrol2MHz
 R1
 R2
@@ -38,23 +38,70 @@ r1
 !s85 0
 31
 !i10b 1
-!s100 go`le`BfABPN_IK4?iNAf0
-I=`FOkJW[V1nPc4__93RU@3
+!s100 Ee_Nz2PXCg9n`UUi]SgiA0
+I55kgIl;d;jC:0YQVaB6_H1
 !s105 control2MHz_sv_unit
 S1
 R0
-w1527619795
+w1527744014
 8control2MHz.sv
 Fcontrol2MHz.sv
 L0 8
 R3
-!s108 1527619806.000000
-!s107 control2MHz.sv|
-!s90 control2MHz.sv|
-!i113 0
 R4
 R5
+R6
+!i113 0
+R7
+R8
 ncontrol2@m@hz
+vcontrol50MHz
+R1
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 HA1UVMz4V8O3l;LDS`Z_C3
+I:7c7Aza4oGi1DbXS<j1a]0
+!s105 control50MHz_sv_unit
+S1
+R0
+w1527735418
+8control50MHz.sv
+Fcontrol50MHz.sv
+L0 8
+R3
+R4
+R5
+R6
+!i113 0
+R7
+R8
+ncontrol50@m@hz
+vfifo
+R1
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 iD5T5AanXo]1DL1f?A:jT1
+IbFBhgj0i[Cc_0jgAP?gcZ1
+!s105 fifo_sv_unit
+S1
+R0
+w1527744915
+8fifo.sv
+Ffifo.sv
+L0 8
+R3
+R4
+R5
+R6
+!i113 0
+R7
+R8
 vgetWord
 R1
 R2
@@ -62,26 +109,50 @@ r1
 !s85 0
 31
 !i10b 1
-!s100 A^A;03`]Vl6^HM?cdkXjW1
-I[R0CzE[j^Xf73B;;GiQAj2
+!s100 R;^gikK6Rn?Ld6?[Zljz13
+I=lZdmnWd;dB8Ii2=f:6L62
 !s105 getWord_sv_unit
 S1
 R0
-w1527632087
+w1527741706
 8getWord.sv
 FgetWord.sv
 L0 8
 R3
-!s108 1527632100.000000
-!s107 getWord.sv|
-!s90 getWord.sv|
-!i113 0
 R4
 R5
+R6
+!i113 0
+R7
+R8
 nget@word
+vramCounter
+R1
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 kJTiSFA;jkngP@B<Y__8K1
+IhW@=_e<D9lP1ca?CSWPA70
+!s105 ramCounter_sv_unit
+S1
+R0
+w1527744223
+8ramCounter.sv
+FramCounter.sv
+L0 8
+R3
+R4
+R5
+R6
+!i113 0
+R7
+R8
+nram@counter
 vsetHeaderFound
 R1
-!s110 1527277562
+!s110 1527719986
 !i10b 1
 !s100 ]zLd[1c]5HSfh6h5aZIOF0
 IzanFlbIokdgIISD:7L<0o0
@@ -97,10 +168,56 @@ R3
 r1
 !s85 0
 31
-!s108 1527277562.000000
-!s107 setHeaderFound.sv|
-!s90 setHeaderFound.sv|
+!s108 1527719986.000000
+!s107 tb.sv|tas.sv|setHeaderFound.sv|header.sv|getWord.sv|getWord2.sv|fifo.sv|control2MHz.sv|control2MHz2.sv|averager.sv|
+!s90 averager.sv|control2MHz2.sv|control2MHz.sv|fifo.sv|getWord2.sv|getWord.sv|header.sv|setHeaderFound.sv|tas.sv|tb.sv|
 !i113 0
+R7
+R8
+nset@header@found
+vtas
+R1
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 [i0PnDPoiVV;aGVl8jkTG1
+IeSmbHEfgeF6RZRRk;aINR2
+!s105 tas_sv_unit
+S1
+R0
+w1527744337
+8tas.sv
+Ftas.sv
+L0 1
+R3
 R4
 R5
-nset@header@found
+R6
+!i113 0
+R7
+R8
+vtb
+R1
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 khVO;:XcFM@^MaAX`j;A^1
+I<97GgA4lEN64EUf<_Waca1
+!s105 tb_sv_unit
+S1
+R0
+w1401594987
+8tb.sv
+Ftb.sv
+L0 1
+R3
+R4
+R5
+R6
+!i113 0
+R7
+R8

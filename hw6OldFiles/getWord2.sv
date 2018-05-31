@@ -14,24 +14,33 @@ module getWord(
       output logic            headerFound       //1 when the word is a5 ro c3.  0 Otherwise
       );
       logic [7:0] tempWord = 8'b0;
+      logic [2:0] count = 0;
       //Indicate when the A5 or C3 header has been headerFound
       //Also will change headerFound to 0 on reset
       always_comb begin
-            headerFound = (word == 8'hA5) || (word == 8'hC3);//We could also add: (tempWord == 8'hA5) || (tempWord == 8'hC3);
+            headerFound = (word == 8'hA5) || (word == 8'hC3);
       end
 
-      always_ff @(posedge clk_50, negedge reset_n, negedge data_ena) begin
-            if (!reset_n) begin
-                  tempWord <= 8'b0;
-            end
-            else if (data_ena) begin
+      always_ff @(posedge clk_50, negedge reset_n) begin
+            if (!reset_n)
+                  word <= 0;
+            else if ((data_ena == 1) && (count != 3'b111)) begin//data_ena is high and count doesn't equal 7
                   tempWord <= {serial_data,tempWord[7:1]};
+                  // tempWord <= (tempWord >> 1);
+                  // tempWord[7] <= serial_data;
+
+                  count <= count + 3'b001;
             end
-            else if (!data_ena) begin
-                  word <= tempWord;
+            else if ((data_ena == 1) && (count == 3'b111)) begin //count has been increased 6 times and is now 7.  During this clock cycle, the output is ready
+                  // word <= (tempWord >> 1);
+                  // word[7] <= serial_data;
+
+                  word <= {serial_data,tempWord[7:1]};
+                  count <= 3'b000;
             end
             else begin
-                  word<=word;
+                  //do nothing
+                  tempWord <= tempWord;
             end
       end
 
