@@ -25,9 +25,9 @@ w1527744164
 Faverager.sv
 L0 8
 Z3 OL;L;10.5;63
-Z4 !s108 1527805027.000000
-Z5 !s107 tb.sv|tas.sv|ramCounter.sv|getWord.sv|fifo.sv|control50MHz.sv|control2MHz.sv|averager.sv|
-Z6 !s90 averager.sv|control2MHz.sv|control50MHz.sv|fifo.sv|getWord.sv|ramCounter.sv|tas.sv|tb.sv|
+Z4 !s108 1527822803.000000
+Z5 !s107 tb.sv|tas.sv|ramCounter.sv|getWord.sv|fifo.sv|ctrl_50.sv|control50MHz.sv|control2MHz.sv|averager.sv|
+Z6 !s90 averager.sv|control2MHz.sv|control50MHz.sv|ctrl_50.sv|fifo.sv|getWord.sv|ramCounter.sv|tas.sv|tb.sv|
 !i113 0
 Z7 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 Z8 tCvgOpt 0
@@ -62,15 +62,39 @@ r1
 !s85 0
 31
 !i10b 1
-!s100 l<LGFZ1bcF0`l^g3mdc6G3
-I<MLLfPX;3YDN;]78:QY9L3
+!s100 5d2jD7UB9X3KZ7__WSQQT1
+IQkTnAV5OjEz1bRgYmTcP@2
 !s105 control50MHz_sv_unit
 S1
 R0
-w1527804865
+w1527816927
 8control50MHz.sv
 Fcontrol50MHz.sv
 L0 8
+R3
+!s108 1527817820.000000
+R5
+R6
+!i113 0
+R7
+R8
+ncontrol50@m@hz
+vctrl_50
+R1
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 dAL]2o7g42fW8[<WGQRjH0
+I?[DeQK=oF]<9=IImOWn`e1
+!s105 ctrl_50_sv_unit
+S1
+R0
+w1527822799
+8ctrl_50.sv
+Fctrl_50.sv
+L0 1
 R3
 R4
 R5
@@ -78,7 +102,6 @@ R6
 !i113 0
 R7
 R8
-ncontrol50@m@hz
 vfifo
 R1
 R2
@@ -182,12 +205,12 @@ r1
 !s85 0
 31
 !i10b 1
-!s100 ?@285>0LEiAY3oP7X7_d`1
-IY1M9k]ze>o2^X5DZc<HU31
+!s100 Z6hAn0F1Oml3UJ]7>;2EL0
+I82Lko31`gPD1O6A;EUD0G1
 !s105 tas_sv_unit
 S1
 R0
-w1527752708
+w1527821020
 8tas.sv
 Ftas.sv
 L0 1

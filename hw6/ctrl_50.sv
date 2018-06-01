@@ -8,7 +8,7 @@ module ctrl_50(
 );
 
 ////////////////////////////////////////
-// BYTE1 out of BYTE4 state machine ///////
+// BYTE1 out of four state machine ///////
 // BYTE2 modes only								 ///////
 // WAITING and WORKING          ///////
 // serial byte									 ///////
@@ -16,30 +16,31 @@ module ctrl_50(
 	WTF_1 = 'x,
 	WAITING = 1'b0,
 	WORKING  = 1'b1
-  } serialBytePresentState, serialByteNextState;
 
-  reg serialFlag;
+  } serialPresentState, serialNextState;
+
+  reg serial_byte_flag;
 
   always_ff @(posedge clk_50, negedge reset_n)
     begin
       if(!reset_n)
         begin
-	  serialBytePresentState <= WAITING;
+	  serialPresentState <= WAITING;
 	end
       else if (data_ena)
         begin
-	  serialBytePresentState <= WORKING;
+	  serialPresentState <= WORKING;
 	end
       else
         begin
-	  serialBytePresentState <= WAITING;
+	  serialPresentState <= WAITING;
 	end
     end
 
 ////////////////////////////////////////
-// BYTE2 out of BYTE4 state machine  //////
+// BYTE2 out of four state machine  //////
 // BYTE1 header											//////
-// BYTE4 bytes											//////
+// four bytes											//////
 // the_byte												//////
   enum reg [2:0]{
   	HEADER	= 3'b000,
@@ -48,77 +49,77 @@ module ctrl_50(
 	BYTE3	= 3'b011,
   	BYTE4	= 3'b100,
 	WTF_2	= 'x
-  } presentState, nextState;
+  } bytePresentState, byteNextState;
 
   always_ff @(posedge clk_50, negedge reset_n)
     begin
       if(!reset_n)
         begin
-	  presentState <= HEADER;
+	  bytePresentState <= HEADER;
 	end
       else
         begin
-	  presentState <= nextState;
+	  bytePresentState <= byteNextState;
 	end
     end
 
 ////////////////////////////////////////
-//  BYTE3 out of BYTE4 state machine ////
+//  three out of four state machine ////
 // GOOD = temp data                 ////
 // BAD  = something else   					////
 // data_type												////
   enum reg [0:0]{
-	INVALIDBYTE	= 1'b0,
-	VALIDBYTE	= 1'b1,
+	INVALIDTYPE	= 1'b0,
+	VALIDTYPE	= 1'b1,
 	WTF_3		= 'x
-  }wordTypePresentState, wordTypeNextState;
+  }validTypePresentState, validTypeNextState;
 
   always_ff @(posedge clk_50, negedge reset_n)
     begin
       if(!reset_n)
         begin
-	  wordTypePresentState	<= INVALIDBYTE;
+	  validTypePresentState	<= INVALIDTYPE;
 	end
       else
         begin
-	  wordTypePresentState	<= wordTypeNextState;
+	  validTypePresentState	<= validTypeNextState;
 	end
     end
 
 ////////////////////////////////////////
-// BYTE4 out of BYTE4 state machine  /////
+// four out of four state machine  /////
 // BYTE2 modes only									 /////
-// WRITE and DONTWRITE								 /////
+// YES_WR and NO_WR								 /////
 // wr_fifo											 /////
   enum reg [0:0]{
-  	DONTWRITE	= 1'b0,
-	WRITE	= 1'b1,
+  	NO_WR	= 1'b0,
+	YES_WR	= 1'b1,
 	WTF_4	= 'x
-  }writeToFifoPresentState, writeToFifoNextState;
+  }wr_fifo_ps,wr_fifo_ns;
 
   always_ff @(posedge clk_50, negedge reset_n)
     begin
       if(!reset_n)
         begin
-	  writeToFifoPresentState	<= DONTWRITE;
+	  wr_fifo_ps	<= NO_WR;
 	end
       else
         begin
-	  writeToFifoPresentState	<= writeToFifoNextState;
+	  wr_fifo_ps	<= wr_fifo_ns;
 	end
     end
 
 
 ////////////////////////////////////////
 // keep tracking the data flow
-// serialFlag == 1
+// serial_byte_flag == 1
 // when
 // data_ena == 0
-// serialBytePresentState == WORKING
+// bytePresentState == WORKING
 ////////////////////////////////////////
    always_comb
       begin
-        serialFlag = (!data_ena && serialBytePresentState);
+        serial_byte_flag = (!data_ena && serialPresentState);
       end
 ////////////////////////////////////////
 
@@ -130,60 +131,60 @@ module ctrl_50(
 
    always_comb
       begin
-        case(presentState)
+        case(bytePresentState)
 	  HEADER:
 	    begin
-	      if(serialFlag == 1)
+	      if(serial_byte_flag == 1)
 	        begin
-		  nextState = BYTE1;
+		  byteNextState = BYTE1;
 		end
 	      else
 	        begin
-		  nextState = HEADER;
+		  byteNextState = HEADER;
 		end
 	    end
 	  BYTE1:
 	    begin
-	      if(serialFlag == 1)
+	      if(serial_byte_flag == 1)
 	        begin
-		  nextState = BYTE2;
+		  byteNextState = BYTE2;
 		end
 	      else
 	        begin
-		  nextState = BYTE1;
+		  byteNextState = BYTE1;
 		end
 	    end
 	  BYTE2:
 	    begin
-	      if(serialFlag == 1)
+	      if(serial_byte_flag == 1)
 	        begin
-		  nextState = BYTE3;
+		  byteNextState = BYTE3;
 		end
 	      else
 	        begin
-		  nextState = BYTE2;
+		  byteNextState = BYTE2;
 		end
 	    end
 	  BYTE3:
 	    begin
-	      if(serialFlag == 1)
+	      if(serial_byte_flag == 1)
 	        begin
-		  nextState = BYTE4;
+		  byteNextState = BYTE4;
 		end
 	      else
 	        begin
-		  nextState = BYTE3;
+		  byteNextState = BYTE3;
 		end
 	    end
 	  BYTE4:
 	    begin
-	      if(serialFlag == 1)
+	      if(serial_byte_flag == 1)
 	        begin
-		  nextState = HEADER;
+		  byteNextState = HEADER;
 		end
 	      else
 	        begin
-		  nextState = BYTE4;
+		  byteNextState = BYTE4;
 		end
 	    end
 	endcase
@@ -196,32 +197,32 @@ module ctrl_50(
 ////////////////////////////////////////
     always_comb
       begin
-        case(wordTypePresentState)
-	  INVALIDBYTE:
+        case(validTypePresentState)
+	  INVALIDTYPE:
 	    begin
 	      if(
 	        (headerFound == 1)
 		&&
-		(nextState == BYTE1)
+		(byteNextState == BYTE1)
 	        )
 	        begin
-		  wordTypeNextState = VALIDBYTE;
+		  validTypeNextState = VALIDTYPE;
 		end
 	      else
 	        begin
-		  wordTypeNextState = INVALIDBYTE;
+		  validTypeNextState = INVALIDTYPE;
 		end
 	    end
 
-	  VALIDBYTE:
+	  VALIDTYPE:
 	    begin
-	      if(nextState == HEADER)
+	      if(byteNextState == HEADER)
 	        begin
-		  wordTypeNextState = INVALIDBYTE;
+		  validTypeNextState = INVALIDTYPE;
 		end
 	      else
 	        begin
-		  wordTypeNextState = VALIDBYTE;
+		  validTypeNextState = VALIDTYPE;
 		end
 	    end
 
@@ -232,28 +233,28 @@ module ctrl_50(
 ////////////////////////////////////////
     always_comb
       begin
-        case (writeToFifoPresentState)
-	  DONTWRITE:
+        case (wr_fifo_ps)
+	  NO_WR:
 	    begin
 	      if(
-	         (serialFlag)
+	         (serial_byte_flag)
 		 &&
-		 (presentState != HEADER)
+		 (bytePresentState != HEADER)
 		 &&
-		 (wordTypePresentState == VALIDBYTE)
+		 (validTypePresentState == VALIDTYPE)
 	        )
 	        begin
-		  writeToFifoNextState = WRITE;
+		  wr_fifo_ns = YES_WR;
 		end
 	      else
 	        begin
-		  writeToFifoNextState = DONTWRITE;
+		  wr_fifo_ns = NO_WR;
 		end
 	    end
 
-	  WRITE:
+	  YES_WR:
     	    begin
-	      writeToFifoNextState = DONTWRITE;
+	      wr_fifo_ns = NO_WR;
 	    end
 
 	endcase
@@ -265,7 +266,7 @@ module ctrl_50(
 ////////////////////////////////////////
     always_comb
       begin
-        if(writeToFifoPresentState == WRITE)
+        if(wr_fifo_ps == YES_WR)
 	  begin
 	    wr = 1;
 	  end

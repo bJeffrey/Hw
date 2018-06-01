@@ -30,12 +30,28 @@ module tas (
             // .byteAssembled          (byteAssembled)
        );
 
-       control50MHz control50MHz0(
-            .clk_50                 (clk_50),
-            .reset_n                (reset_n),
-            .data_ena               (data_ena),
-            .headerFound            (headerFound),
-            .wr                     (wr)
+       // control50MHz control50MHz0(
+            // .clk_50                 (clk_50),
+            // .reset_n                (reset_n),
+            // .data_ena               (data_ena),
+            // .headerFound            (headerFound),
+            // .wr                     (wr)
+       // );
+
+       // ctrl_50 ctrl_50_0(
+       // .clk                       (clk_50),
+       // .reset_n                     (reset_n),
+       // .serial_enable               (data_ena),
+       // .header_check                (headerFound),
+       // .write                  (wr)
+       // );
+
+       ctrl_50 ctrl_50_0(
+           .clk_50                 (clk_50),
+           .reset_n                (reset_n),
+           .data_ena               (data_ena),
+           .headerFound            (headerFound),
+           .wr                     (wr)
        );
 
        control2MHz control2MHz0(
