@@ -13,7 +13,7 @@ module ctrl_50(
 // WAITING and WORKING          ///////
 // serial byte									 ///////
   enum reg [0:0]{
-	WTF_1 = 'x,
+	// WTF_1 = 'x,
 	WAITING = 1'b0,
 	WORKING  = 1'b1
 
@@ -47,8 +47,8 @@ module ctrl_50(
   	BYTE1	= 3'b001,
 	BYTE2	= 3'b010,
 	BYTE3	= 3'b011,
-  	BYTE4	= 3'b100,
-	WTF_2	= 'x
+  	BYTE4	= 3'b100
+	// WTF_2	= 'x
   } bytePresentState, byteNextState;
 
   always_ff @(posedge clk_50, negedge reset_n)
@@ -70,8 +70,8 @@ module ctrl_50(
 // data_type												////
   enum reg [0:0]{
 	INVALIDTYPE	= 1'b0,
-	VALIDTYPE	= 1'b1,
-	WTF_3		= 'x
+	VALIDTYPE	= 1'b1
+	// WTF_3		= 'x
   }validTypePresentState, validTypeNextState;
 
   always_ff @(posedge clk_50, negedge reset_n)
@@ -93,8 +93,8 @@ module ctrl_50(
 // wr_fifo											 /////
   enum reg [0:0]{
   	DONTWRITE	= 1'b0,
-	WRITE	= 1'b1,
-	WTF_4	= 'x
+	WRITE	= 1'b1
+	// WTF_4	= 'x
   }writeToFifoPresentState,writeToFifoNextState;
 
   always_ff @(posedge clk_50, negedge reset_n)
