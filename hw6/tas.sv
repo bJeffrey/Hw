@@ -46,7 +46,7 @@ module tas (
        // .write                  (wr)
        // );
 
-       ctrl_50 ctrl_50_0(
+       control50MHz control50MHz0(
            .clk_50                 (clk_50),
            .reset_n                (reset_n),
            .data_ena               (data_ena),

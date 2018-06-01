@@ -1,280 +1,183 @@
-module ctrl_50(
+// *********************************************************
+// Program: control50MHz.sv
+// Description: controls the write strobe for the 50 MHz clock
+// Author: Jeffrey Noe
+// Due: 6/01/2018
+// *********************************************************
+
+module control50MHz(
 
 	input	clk_50,
 	input	reset_n,
 	input	data_ena,
 	input	headerFound,
 	output	reg wr
-);
+	);
 
-////////////////////////////////////////
-// BYTE1 out of BYTE4 state machine ///////
-// BYTE2 modes only								 ///////
-// WAITING and WORKING          ///////
-// serial byte									 ///////
-  enum reg [0:0]{
-	WTF_1 = 'x,
-	WAITING = 1'b0,
-	WORKING  = 1'b1
-  } serialBytePresentState, serialByteNextState;
+	enum reg {
+		WAITING = 1'b0,
+		WORKING  = 1'b1
+  	} serialPresentState, serialNextState;
 
-  reg serialFlag;
-
-  always_ff @(posedge clk_50, negedge reset_n)
-    begin
-      if(!reset_n)
-        begin
-	  serialBytePresentState <= WAITING;
-	end
-      else if (data_ena)
-        begin
-	  serialBytePresentState <= WORKING;
-	end
-      else
-        begin
-	  serialBytePresentState <= WAITING;
-	end
-    end
-
-////////////////////////////////////////
-// BYTE2 out of BYTE4 state machine  //////
-// BYTE1 header											//////
-// BYTE4 bytes											//////
-// the_byte												//////
-  enum reg [2:0]{
-  	HEADER	= 3'b000,
-  	BYTE1	= 3'b001,
-	BYTE2	= 3'b010,
-	BYTE3	= 3'b011,
-  	BYTE4	= 3'b100,
-	WTF_2	= 'x
-  } presentState, nextState;
-
-  always_ff @(posedge clk_50, negedge reset_n)
-    begin
-      if(!reset_n)
-        begin
-	  presentState <= HEADER;
-	end
-      else
-        begin
-	  presentState <= nextState;
-	end
-    end
-
-////////////////////////////////////////
-//  BYTE3 out of BYTE4 state machine ////
-// GOOD = temp data                 ////
-// BAD  = something else   					////
-// data_type												////
-  enum reg [0:0]{
-	INVALIDBYTE	= 1'b0,
-	VALIDBYTE	= 1'b1,
-	WTF_3		= 'x
-  }wordTypePresentState, wordTypeNextState;
-
-  always_ff @(posedge clk_50, negedge reset_n)
-    begin
-      if(!reset_n)
-        begin
-	  wordTypePresentState	<= INVALIDBYTE;
-	end
-      else
-        begin
-	  wordTypePresentState	<= wordTypeNextState;
-	end
-    end
-
-////////////////////////////////////////
-// BYTE4 out of BYTE4 state machine  /////
-// BYTE2 modes only									 /////
-// WRITE and DONTWRITE								 /////
-// wr_fifo											 /////
-  enum reg [0:0]{
-  	DONTWRITE	= 1'b0,
-	WRITE	= 1'b1,
-	WTF_4	= 'x
-  }writeToFifoPresentState, writeToFifoNextState;
-
-  always_ff @(posedge clk_50, negedge reset_n)
-    begin
-      if(!reset_n)
-        begin
-	  writeToFifoPresentState	<= DONTWRITE;
-	end
-      else
-        begin
-	  writeToFifoPresentState	<= writeToFifoNextState;
-	end
-    end
-
-
-////////////////////////////////////////
-// keep tracking the data flow
-// serialFlag == 1
-// when
-// data_ena == 0
-// serialBytePresentState == WORKING
-////////////////////////////////////////
-   always_comb
-      begin
-        serialFlag = (!data_ena && serialBytePresentState);
-      end
-////////////////////////////////////////
-
-////////////////////////////////////////
-// loop through all of the bytes
-// clockwiselly, and go back to
-// header
-////////////////////////////////////////
-
-   always_comb
-      begin
-        case(presentState)
-	  HEADER:
-	    begin
-	      if(serialFlag == 1)
-	        begin
-		  nextState = BYTE1;
+  	reg byteFlag;
+	//controls the serial state (working v. waiting)
+  	always_ff @(posedge clk_50, negedge reset_n) begin
+      	if(!reset_n) begin
+	  		serialPresentState <= WAITING;
 		end
-	      else
-	        begin
-		  nextState = HEADER;
+      	else if (data_ena) begin
+	  		serialPresentState <= WORKING;
 		end
-	    end
-	  BYTE1:
-	    begin
-	      if(serialFlag == 1)
-	        begin
-		  nextState = BYTE2;
+      	else begin
+	  		serialPresentState <= WAITING;
 		end
-	      else
-	        begin
-		  nextState = BYTE1;
-		end
-	    end
-	  BYTE2:
-	    begin
-	      if(serialFlag == 1)
-	        begin
-		  nextState = BYTE3;
-		end
-	      else
-	        begin
-		  nextState = BYTE2;
-		end
-	    end
-	  BYTE3:
-	    begin
-	      if(serialFlag == 1)
-	        begin
-		  nextState = BYTE4;
-		end
-	      else
-	        begin
-		  nextState = BYTE3;
-		end
-	    end
-	  BYTE4:
-	    begin
-	      if(serialFlag == 1)
-	        begin
-		  nextState = HEADER;
-		end
-	      else
-	        begin
-		  nextState = BYTE4;
-		end
-	    end
-	endcase
-      end
-////////////////////////////////////////
+   	end
 
-////////////////////////////////////////
-// GOOD = temp data
-// BAD  = something else
-////////////////////////////////////////
-    always_comb
-      begin
-        case(wordTypePresentState)
-	  INVALIDBYTE:
-	    begin
-	      if(
-	        (headerFound == 1)
-		&&
-		(nextState == BYTE1)
-	        )
-	        begin
-		  wordTypeNextState = VALIDBYTE;
-		end
-	      else
-	        begin
-		  wordTypeNextState = INVALIDBYTE;
-		end
-	    end
+	enum reg [2:0]{
+  		HEADER = 3'b000,
+  		BYTE1	= 3'b001,
+		BYTE2	= 3'b010,
+		BYTE3	= 3'b011,
+  		BYTE4	= 3'b100
+  	} bytePresentState, byteNextState;
 
-	  VALIDBYTE:
-	    begin
-	      if(nextState == HEADER)
-	        begin
-		  wordTypeNextState = INVALIDBYTE;
+	//Once a header is recieved, move from one byte to the next for 4 bytes
+  	always_ff @(posedge clk_50, negedge reset_n) begin
+      	if(!reset_n) begin
+			bytePresentState <= HEADER;
 		end
-	      else
-	        begin
-		  wordTypeNextState = VALIDBYTE;
+      	else begin
+	  		bytePresentState <= byteNextState;
 		end
-	    end
+  	end
 
-	endcase
-      end
-////////////////////////////////////////
+	enum logic {
+		INVALIDTYPE	= 1'b0,
+		VALIDTYPE	= 1'b1
+  	}validTypePresentState, validTypeNextState;
 
-////////////////////////////////////////
-    always_comb
-      begin
-        case (writeToFifoPresentState)
-	  DONTWRITE:
-	    begin
-	      if(
-	         (serialFlag)
-		 &&
-		 (presentState != HEADER)
-		 &&
-		 (wordTypePresentState == VALIDBYTE)
-	        )
-	        begin
-		  writeToFifoNextState = WRITE;
+	//check the validity of the state
+  	always_ff @(posedge clk_50, negedge reset_n) begin
+      	if(!reset_n) begin
+	  		validTypePresentState	<= INVALIDTYPE;
 		end
-	      else
-	        begin
-		  writeToFifoNextState = DONTWRITE;
+      	else begin
+	  		validTypePresentState	<= validTypeNextState;
 		end
-	    end
+    	end
 
-	  WRITE:
-    	    begin
-	      writeToFifoNextState = DONTWRITE;
-	    end
+	enum logic {
+  		DONTWRITE	= 1'b0,
+		WRITE	= 1'b1
+  	}writeToFifoPresentState, writeToFifoNextState;
 
-	endcase
-      end
-////////////////////////////////////////
+	//State machine for writing/not writing
+  	always_ff @(posedge clk_50, negedge reset_n) begin
+      	if(!reset_n) begin
+	  		writeToFifoPresentState	<= DONTWRITE;
+		end
+      	else begin
+			writeToFifoPresentState	<= writeToFifoNextState;
+		end
+    	end
 
-////////////////////////////////////////
-// output logic
-////////////////////////////////////////
-    always_comb
-      begin
-        if(writeToFifoPresentState == WRITE)
-	  begin
-	    wr = 1;
-	  end
-	else
-	  begin
-	    wr = 0;
-	  end
+	//put byteFlag high when data_ena is low and serialPresentState is not 0 (waiting)
+	always_comb begin
+      	byteFlag = (!data_ena && serialPresentState);
       end
 
+	//move through each of four bytes
+	always_comb begin
+		case(bytePresentState)
+	  		HEADER: begin
+	      		if(byteFlag == 1) begin
+		  			byteNextState = BYTE1;
+				end
+	      		else begin
+		  			byteNextState = HEADER;
+				end
+	    		end
+	  		BYTE1: begin
+	      		if(byteFlag == 1) begin
+		  			byteNextState = BYTE2;
+				end
+	      		else begin
+		  			byteNextState = BYTE1;
+				end
+	    		end
+	  		BYTE2: begin
+	      		if(byteFlag == 1) begin
+		  			byteNextState = BYTE3;
+				end
+	      		else begin
+		  			byteNextState = BYTE2;
+				end
+	    		end
+	  		BYTE3: begin
+	      		if(byteFlag == 1) begin
+		  			byteNextState = BYTE4;
+				end
+	      		else begin
+		  			byteNextState = BYTE3;
+				end
+	    		end
+	  		BYTE4: begin
+	      		if(byteFlag == 1) begin
+		  			byteNextState = HEADER;
+				end
+	      		else begin
+		  			byteNextState = BYTE4;
+				end
+	    		end
+		endcase
+	end
 
+	//check for valid/invalid byte
+	always_comb begin
+        case(validTypePresentState)
+	  	INVALIDTYPE: begin
+	      	if((headerFound == 1) && (byteNextState == BYTE1)) begin
+		  		validTypeNextState = VALIDTYPE;
+			end
+	      	else begin
+		  		validTypeNextState = INVALIDTYPE;
+			end
+	    	end
+	  	VALIDTYPE: begin
+	      	if(byteNextState == HEADER) begin
+		  		validTypeNextState = INVALIDTYPE;
+			end
+	      	else begin
+		  		validTypeNextState = VALIDTYPE;
+			end
+	    	end
+	  endcase
+      end
 
+	//control when to write/don't write
+	always_comb begin
+      	case (writeToFifoPresentState)
+	  		DONTWRITE: begin
+	  			if((byteFlag) && (bytePresentState != HEADER) && (validTypePresentState == VALIDTYPE)) begin
+		  			writeToFifoNextState = WRITE;
+				end
+	      		else begin
+		  			writeToFifoNextState = DONTWRITE;
+				end
+	    		end
+	  		WRITE: begin
+	      		writeToFifoNextState = DONTWRITE;
+	    		end
+		endcase
+      end
+
+	//final send of the write strobe.  Sent to fifo
+	always_comb begin
+		if(writeToFifoPresentState == WRITE) begin
+	    		wr = 1;
+	  	end
+		else begin
+	    		wr = 0;
+	  	end
+      end
 endmodule
