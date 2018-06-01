@@ -12,18 +12,27 @@
 # //  18 U.S.C. Section 1905.
 # //
 # vsim -novopt tb 
-# Start time: 22:46:54 on May 30,2018
+# Start time: 15:17:16 on May 31,2018
 # ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# Refreshing /nfs/stak/users/noej/ece574/Hw/hw6/work.tb
 # Loading sv_std.std
 # Loading work.tb
+# Refreshing /nfs/stak/users/noej/ece574/Hw/hw6/work.tas
 # Loading work.tas
+# Refreshing /nfs/stak/users/noej/ece574/Hw/hw6/work.getWord
 # Loading work.getWord
+# Refreshing /nfs/stak/users/noej/ece574/Hw/hw6/work.control50MHz
 # Loading work.control50MHz
+# Refreshing /nfs/stak/users/noej/ece574/Hw/hw6/work.control2MHz
 # Loading work.control2MHz
+# Refreshing /nfs/stak/users/noej/ece574/Hw/hw6/work.fifo
 # Loading work.fifo
+# Refreshing /nfs/stak/users/noej/ece574/Hw/hw6/work.averager
 # Loading work.averager
+# Refreshing /nfs/stak/users/noej/ece574/Hw/hw6/work.ramCounter
 # Loading work.ramCounter
-add wave -position insertpoint sim:/tb/tas_0/fifo0/*
+add wave -position insertpoint sim:/tb/tas_0/getWord0/*
+add wave -position insertpoint sim:/tb/tas_0/control50MHz0/*
 run
 # ** Warning: (vsim-3533) [FOFIW] - Failed to open file "vectors/output_data" for writing.
 # No such file or directory. (errno = ENOENT)    : tb.sv(35)
@@ -31,8 +40,14 @@ run
 # ERROR : Cannot open file output_data
 # ** Warning: (vsim-8315) control2MHz.sv(35): No condition is true in the unique/priority if/case statement.
 #    Time: 0 ns  Iteration: 0  Instance: /tb/tas_0/control2MHz0
+# ** Warning: (vsim-8315) control50MHz.sv(74): No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Instance: /tb/tas_0/control50MHz0
+# ** Warning: (vsim-8315) control50MHz.sv(49): No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Instance: /tb/tas_0/control50MHz0
 # ** Warning: (vsim-8315) control2MHz.sv(35): No condition is true in the unique/priority if/case statement.
 #    Time: 0 ns  Iteration: 1  Instance: /tb/tas_0/control2MHz0
+# ** Warning: (vsim-8315) control50MHz.sv(49): No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 1  Instance: /tb/tas_0/control50MHz0
 run
 run
 run
@@ -45,20 +60,6 @@ run
 run
 # sending: 3a
 run
-run
-# sending: 55
-run
-run
-run
-# sending: 43
-run
-run
-# sending: 3c
-run
-run
-run
-run
-run
 quit -f
-# End time: 22:58:10 on May 30,2018, Elapsed time: 0:11:16
-# Errors: 0, Warnings: 4
+# End time: 15:29:49 on May 31,2018, Elapsed time: 0:12:33
+# Errors: 0, Warnings: 7

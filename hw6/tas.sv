@@ -9,7 +9,8 @@ module tas (
        output [10:0] ram_addr       // ram address
        );
 
-       wire headerFound;
+       wire headerFound;                  //header detected from the input
+       // wire byteAssembled;                 //new byte has been assembled from the input
        wire wr;                           //write to the fifo
        wire rd;                           //read from the fifo
        wire empty;                        //fifo is empty
@@ -26,6 +27,7 @@ module tas (
             .data_ena               (data_ena),
             .word                   (word),
             .headerFound            (headerFound)
+            // .byteAssembled          (byteAssembled)
        );
 
        control50MHz control50MHz0(
