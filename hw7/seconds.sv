@@ -59,7 +59,7 @@ module seconds (
                         nextState = IDLE;
                   end
                   INC: begin
-                        sec = sec + 6'b1;
+                        sec = sec + 6'b000001;
                         nextState = IDLE;
                   end
             endcase

@@ -11,18 +11,107 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-# vsim -novopt tb -do "doit.do" 
-# Start time: 17:10:22 on Jun 06,2018
+# vsim -novopt clock 
+# Start time: 11:06:56 on Jun 07,2018
 # ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
 # Loading sv_std.std
-# Loading work.tb
 # Loading work.clock
 # Loading work.clkSync
 # Loading work.seconds
 # Loading work.minutes
 # Loading work.hours
 # Loading work.displayDigits
-# do doit.do
-# Missing signal name or pattern
+add wave -position insertpoint sim:/clock/minutes0/*
+add wave -position insertpoint sim:/clock/clkSync0/*
+add wave -position insertpoint sim:/clock/minutes0/*
+force -freeze sim:/clock/clkSync0/clkSec 1 0, 0 {500 ns} -r 1000
+force -freeze sim:/clock/clkSync0/clkMSec 1 0, 0 {50 ns} -r 100
+force resetN 1
+run 100
+# ** Warning: (vsim-8315) minutes.sv(36): No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 0  Instance: /clock/minutes0
 # ** Warning: (vsim-8315) seconds.sv(37): No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Instance: /tb/clock_0/seconds0
+#    Time: 0 ns  Iteration: 0  Instance: /clock/seconds0
+# ** Warning: (vsim-8315) seconds.sv(37): No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 2  Instance: /clock/seconds0
+# ** Warning: (vsim-8315) seconds.sv(37): No condition is true in the unique/priority if/case statement.
+#    Time: 100 ns  Iteration: 1  Instance: /clock/seconds0
+force resetN 0
+run 100
+force resetN 1
+run 100
+
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position insertpoint sim:/clock/seconds0/*
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+quit -f
+# End time: 11:14:41 on Jun 07,2018, Elapsed time: 0:07:45
+# Errors: 0, Warnings: 5

@@ -38,6 +38,7 @@ module clock (
        minutes minutes0(
             .clkMSec          (clk_1ms),
             .resetN           (reset_n),
+            .changeMin        (changeMin),
             .changeHour       (changeHour),
             .min              (min)
        );
@@ -46,6 +47,7 @@ module clock (
             .clkMSec          (clk_1ms),
             .resetN           (reset_n),
             .milTime          (mil_time),
+            .changeHour       (changeHour),
             .amPm             (amPm),
             .hour            (hour)
        );
