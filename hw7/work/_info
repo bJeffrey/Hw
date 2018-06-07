@@ -7,4 +7,167 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-d/nfs/stak/users/noej/ece574/Hw/hw7
+Z0 d/nfs/stak/users/noej/ece574/Hw/hw7
+vclkSync
+Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+r1
+!s85 0
+31
+!i10b 1
+!s100 TijIIWW]hIj_3KPg<N>K;2
+IGKT>@F3F73nfWm46hQJ1h3
+!s105 clkSync_sv_unit
+S1
+R0
+w1528304743
+8clkSync.sv
+FclkSync.sv
+L0 8
+Z3 OL;L;10.5;63
+Z4 !s108 1528329858.000000
+Z5 !s107 tb.sv|seconds.sv|minutes.sv|hours.sv|displayDigits.sv|clock.sv|clkSync.sv|
+Z6 !s90 clkSync.sv|clock.sv|displayDigits.sv|hours.sv|minutes.sv|seconds.sv|tb.sv|
+!i113 0
+Z7 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z8 tCvgOpt 0
+nclk@sync
+vclock
+R1
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 Qg?O;I1Cn@3[YP?AF];_22
+I0TIzjgYljBQ<`[XLSZ_:W0
+!s105 clock_sv_unit
+S1
+R0
+w1528329676
+8clock.sv
+Fclock.sv
+L0 7
+R3
+R4
+R5
+R6
+!i113 0
+R7
+R8
+vdisplayDigits
+R1
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 =bD_CcON9MJYg]5QLY`0j3
+IEo1<8N4Od^AV;K:Q1=o6<3
+!s105 displayDigits_sv_unit
+S1
+R0
+w1528329831
+8displayDigits.sv
+FdisplayDigits.sv
+L0 8
+R3
+R4
+R5
+R6
+!i113 0
+R7
+R8
+ndisplay@digits
+vhours
+R1
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 [kWg@f>HA;@;OcSIeC`I?1
+InFG]1_L9fIE]0KIBKX9Qn1
+!s105 hours_sv_unit
+S1
+R0
+w1528236405
+8hours.sv
+Fhours.sv
+L0 8
+R3
+R4
+R5
+R6
+!i113 0
+R7
+R8
+vminutes
+R1
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 L>i]c77cecLSQWo4NCX6e2
+ILB2Tg=jiaRWC7X;hbNJ?]0
+!s105 minutes_sv_unit
+S1
+R0
+w1528236342
+8minutes.sv
+Fminutes.sv
+L0 8
+R3
+R4
+R5
+R6
+!i113 0
+R7
+R8
+vseconds
+R1
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 4GkZo=dSIA4Q1TJmm6fLF1
+IS@B;`2KkDFnbg<_lDOfLG2
+!s105 seconds_sv_unit
+S1
+R0
+w1528304894
+8seconds.sv
+Fseconds.sv
+L0 8
+R3
+R4
+R5
+R6
+!i113 0
+R7
+R8
+vtb
+R1
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 3EgBhU3S]?Fc[>f`]ZYkO0
+IEYY66`@Zz3>ICVib39dmj2
+!s105 tb_sv_unit
+S1
+R0
+w1528329425
+8tb.sv
+Ftb.sv
+L0 1
+R3
+R4
+R5
+R6
+!i113 0
+R7
+R8
