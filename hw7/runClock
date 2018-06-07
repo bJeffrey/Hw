@@ -1,4 +1,4 @@
 #!/bin/bash
 
-#vsim -novopt clock do doit.do -quiet -c
-vsim -novopt clock do doit.do
+#vsim -novopt tb do doit.do -quiet -c
+vsim -novopt tb do doit.do

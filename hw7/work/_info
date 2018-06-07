@@ -10,7 +10,7 @@ cModel Technology
 Z0 d/nfs/stak/users/noej/ece574/Hw/hw7
 vclkSync
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z2 !s110 1528397593
+Z2 !s110 1528399195
 !i10b 1
 !s100 TijIIWW]hIj_3KPg<N>K;2
 IGKT>@F3F73nfWm46hQJ1h3
@@ -26,7 +26,7 @@ Z4 OL;L;10.5;63
 r1
 !s85 0
 31
-Z5 !s108 1528397593.000000
+Z5 !s108 1528399195.000000
 Z6 !s107 tb.sv|seconds.sv|minutes.sv|hours.sv|displayDigits.sv|clock.sv|clkSync.sv|
 Z7 !s90 clkSync.sv|clock.sv|displayDigits.sv|hours.sv|minutes.sv|seconds.sv|tb.sv|
 !i113 0
@@ -86,13 +86,13 @@ vhours
 R1
 R2
 !i10b 1
-!s100 M7cIbSDl<IWd:FHclHTZ23
-Im;Nzf@=gX5_ka=I25J5TT2
+!s100 3fmelmhYb]nb^i8BEBIkm3
+IRNY:zF:d=c_BZKcHz6D]Z1
 R3
 !s105 hours_sv_unit
 S1
 R0
-w1528397590
+w1528398909
 8hours.sv
 Fhours.sv
 L0 8

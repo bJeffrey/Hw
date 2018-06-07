@@ -18,6 +18,9 @@ sim:/tb/clock_0/changeMin
 
 #print every minute
 add list -nodelta
+#print every minute
+configure list -strobestart {0 ns} -strobeperiod {60000 ns}
+#print every hour
 configure list -strobestart {0 ns} -strobeperiod {60000 ns}
 configure list -usestrobe 1
 
