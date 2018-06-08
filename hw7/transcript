@@ -12,31 +12,26 @@
 # //  18 U.S.C. Section 1905.
 # //
 # vsim -novopt tb 
-# Start time: 11:18:58 on Jun 08,2018
+# Start time: 16:17:08 on Jun 08,2018
 # ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# Refreshing /nfs/stak/users/noej/ece574/Hw/hw7/work.tb
 # Loading sv_std.std
 # Loading work.tb
-# Refreshing /nfs/stak/users/noej/ece574/Hw/hw7/work.clock
 # Loading work.clock
-# Refreshing /nfs/stak/users/noej/ece574/Hw/hw7/work.clkSync
 # Loading work.clkSync
-# Refreshing /nfs/stak/users/noej/ece574/Hw/hw7/work.seconds
 # Loading work.seconds
-# Refreshing /nfs/stak/users/noej/ece574/Hw/hw7/work.minutes
 # Loading work.minutes
-# Refreshing /nfs/stak/users/noej/ece574/Hw/hw7/work.hours
 # Loading work.hours
-# Refreshing /nfs/stak/users/noej/ece574/Hw/hw7/work.displayDigits
 # Loading work.displayDigits
-do doit.do
-# Missing signal name or pattern
+do doit2.do
 # ** Warning: (vsim-8315) hours.sv(39): No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Instance: /tb/clock_0/hours0
+#    Time: 0 ns  Iteration: 0  Instance: /tb/clock0/hours0
 # ** Warning: (vsim-8315) minutes.sv(36): No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Instance: /tb/clock_0/minutes0
+#    Time: 0 ns  Iteration: 0  Instance: /tb/clock0/minutes0
 # ** Warning: (vsim-8315) seconds.sv(37): No condition is true in the unique/priority if/case statement.
-#    Time: 0 ns  Iteration: 0  Instance: /tb/clock_0/seconds0
+#    Time: 0 ns  Iteration: 0  Instance: /tb/clock0/seconds0
+# ** Warning: (vsim-8315) hours.sv(39): No condition is true in the unique/priority if/case statement.
+#    Time: 0 ns  Iteration: 1  Instance: /tb/clock0/hours0
+# Can't move the Now cursor.
 quit -f
-# End time: 11:22:27 on Jun 08,2018, Elapsed time: 0:03:29
-# Errors: 0, Warnings: 4
+# End time: 16:20:11 on Jun 08,2018, Elapsed time: 0:03:03
+# Errors: 1, Warnings: 5

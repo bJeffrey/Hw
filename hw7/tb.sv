@@ -8,8 +8,8 @@
 module tb;
 
 //both clock values are scaled for testing purposes
-parameter SHORTCLOCK = 1; //digit display clock (1 ns period)
-parameter LONGCLOCK   = 100;//seconds clock (100 ns period)
+parameter SHORTCLOCK = 10; //digit display clock (1 ns period)
+parameter LONGCLOCK   = 1000;//seconds clock (100 ns period)
 
 logic clk_1ms,clk_1sec,mil_time,reset_n;
 
@@ -37,6 +37,6 @@ initial begin
 end
 
 //instantiate all wires in the clock top module
-clock clock_0(.*);
+clock clock0(.*);
 
 endmodule
