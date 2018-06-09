@@ -60,17 +60,39 @@ module hours (
                               nextState = SETHOURTO01;
                   end
                   INC: begin
+                        if(milTime == 1'b0 && hour == 5'd12) begin
+                              hourMSB = 2'd0;
+                              hourLSB = 4'd1;
+                        end
+                        else if(hourLSB == 4'd9) begin
+                              hourMSB = hourMSB + 2'd1;
+                              hourLSB = 4'd0;
+                        end
+                        else
+                              hourLSB = hourLSB + 4'd1;
                         hour = hour + 5'd1;
                         nextState = IDLE;
                   end
                   SETHOURTO01: begin
+                        hourMSB = 2'd0;
+                        hourLSB = 4'd1;
                         hour = 5'd1;
                         nextState = IDLE;
                   end
                   INCANDFLIPAMPM: begin
-                        hour = hour + 5'd1;
-                        amPm = ~amPm;
-                        nextState = IDLE;
+                  if(hour == 5'd12) begin
+                        hourMSB = 2'd0;
+                        hourLSB = 4'd1;
+                  end
+                  else if(hourLSB == 4'd9) begin
+                        hourMSB = hourMSB + 2'd1;
+                        hourLSB = 4'd0;
+                  end
+                  else
+                        hourLSB = hourLSB + 4'd1;
+                  hour = hour + 5'd1;
+                  amPm = ~amPm;
+                  nextState = IDLE;
                   end
                   CHECKMILHOUR: begin
                         if(hour == 5'd23)
@@ -80,14 +102,22 @@ module hours (
                   end
                   SETHOURTO00: begin
                         hour = 5'd0;
+                        hourMSB = 2'd0;
+                        hourLSB = 4'd0;
                         nextState = IDLE;
                   end
                   RESETCLOCK: begin
                         amPm = 1'b0;
-                        if(milTime)
+                        if(milTime) begin
+                              hourMSB = 2'd0;
+                              hourLSB = 4'd0;
                               hour = 5'd0;
-                        else
+                        end
+                        else begin
+                              hourMSB = 2'd1;
+                              hourLSB = 4'd2;
                               hour = 5'd12;
+                        end
                         nextState = IDLE;
                   end
             endcase

@@ -12,7 +12,7 @@
 # //  18 U.S.C. Section 1905.
 # //
 # vsim -novopt tb 
-# Start time: 16:54:08 on Jun 08,2018
+# Start time: 17:49:32 on Jun 08,2018
 # ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
 # Refreshing /nfs/stak/users/noej/ece574/Hw/hw7/work.tb
 # Loading sv_std.std
@@ -29,25 +29,15 @@
 # Loading work.hours
 # Refreshing /nfs/stak/users/noej/ece574/Hw/hw7/work.displayDigits
 # Loading work.displayDigits
-# ** Warning: (vsim-3017) clock.sv(57): [TFMPC] - Too few port connections. Expected 9, found 8.
-#    Time: 0 ns  Iteration: 0  Instance: /tb/clock0/displayDigits0 File: displayDigits.sv
-# ** Warning: (vsim-3722) clock.sv(57): [TFMPC] - Missing connection for port 'min'.
 do doit2.do
-# ** Error: (vish-4014) No objects found matching '/tb/clock0/min'.
-# Error in macro ./doit2.do line 28
-# (vish-4014) No objects found matching '/tb/clock0/min'.
-#     while executing
-# "add wave -position insertpoint  \
-# sim:/tb/clock0/min"
-do doit2.do
-# ** Warning: (vsim-8315) hours.sv(39): No condition is true in the unique/priority if/case statement.
+# ** Warning: (vsim-8315) hours.sv(41): No condition is true in the unique/priority if/case statement.
 #    Time: 0 ns  Iteration: 0  Instance: /tb/clock0/hours0
 # ** Warning: (vsim-8315) minutes.sv(38): No condition is true in the unique/priority if/case statement.
 #    Time: 0 ns  Iteration: 0  Instance: /tb/clock0/minutes0
 # ** Warning: (vsim-8315) seconds.sv(37): No condition is true in the unique/priority if/case statement.
 #    Time: 0 ns  Iteration: 0  Instance: /tb/clock0/seconds0
-# ** Warning: (vsim-8315) hours.sv(39): No condition is true in the unique/priority if/case statement.
+# ** Warning: (vsim-8315) hours.sv(41): No condition is true in the unique/priority if/case statement.
 #    Time: 0 ns  Iteration: 1  Instance: /tb/clock0/hours0
 quit -f
-# End time: 16:59:27 on Jun 08,2018, Elapsed time: 0:05:19
-# Errors: 3, Warnings: 7
+# End time: 17:53:52 on Jun 08,2018, Elapsed time: 0:04:20
+# Errors: 0, Warnings: 5

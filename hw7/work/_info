@@ -10,109 +10,107 @@ cModel Technology
 Z0 d/nfs/stak/users/noej/ece574/Hw/hw7
 vclkSync
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z2 !s110 1528502741
-!i10b 1
-!s100 TijIIWW]hIj_3KPg<N>K;2
-IGKT>@F3F73nfWm46hQJ1h3
-Z3 VDg1SIo80bB@j0V0VzS_@n1
-!s105 clkSync_sv_unit
-S1
-R0
-Z4 w1528488295
-8clkSync.sv
-FclkSync.sv
-L0 8
-Z5 OL;L;10.5;63
+Z2 VDg1SIo80bB@j0V0VzS_@n1
 r1
 !s85 0
 31
-Z6 !s108 1528502741.000000
-Z7 !s107 tb.sv|seconds.sv|minutes.sv|hours.sv|displayDigits.sv|clock.sv|clkSync.sv|
-Z8 !s90 clkSync.sv|clock.sv|displayDigits.sv|hours.sv|minutes.sv|seconds.sv|tb.sv|
+!i10b 1
+!s100 TijIIWW]hIj_3KPg<N>K;2
+IGKT>@F3F73nfWm46hQJ1h3
+!s105 clkSync_sv_unit
+S1
+R0
+Z3 w1528488295
+8clkSync.sv
+FclkSync.sv
+L0 8
+Z4 OL;L;10.5;63
+Z5 !s108 1528505355.000000
+Z6 !s107 tb.sv|seconds.sv|minutes.sv|hours.sv|displayDigits.sv|clock.sv|clkSync.sv|
+Z7 !s90 clkSync.sv|clock.sv|displayDigits.sv|hours.sv|minutes.sv|seconds.sv|tb.sv|
 !i113 0
-Z9 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-Z10 tCvgOpt 0
+Z8 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z9 tCvgOpt 0
 nclk@sync
 vclock
 R1
 R2
+r1
+!s85 0
+31
 !i10b 1
-!s100 2V0W2DUHI<QU`8P=6RnS_0
-IJ65KX6PLi^UMXa4hG:?;g3
-R3
+!s100 fDSVA>F:b9Um7PXze1bTH0
+I7om?HK^Me99?CVYIl8o]a0
 !s105 clock_sv_unit
 S1
 R0
-w1528502604
+w1528504671
 8clock.sv
 Fclock.sv
 L0 7
+R4
 R5
-r1
-!s85 0
-31
 R6
 R7
-R8
 !i113 0
+R8
 R9
-R10
 vdisplayDigits
 R1
 R2
-!i10b 1
-!s100 EP`K^ZFNfDQ3eW^j?1]cO0
-IGc>AF^aWoN@m1MEd2_ISJ3
-R3
-!s105 displayDigits_sv_unit
-S1
-R0
-w1528501350
-8displayDigits.sv
-FdisplayDigits.sv
-L0 8
-R5
 r1
 !s85 0
 31
+!i10b 1
+!s100 E3682d3G=[f@6Nl^4<Vaj0
+IRbHLmMWi<DAT:OfebUSBO3
+!s105 displayDigits_sv_unit
+S1
+R0
+w1528504815
+8displayDigits.sv
+FdisplayDigits.sv
+L0 8
+R4
+R5
 R6
 R7
-R8
 !i113 0
+R8
 R9
-R10
 ndisplay@digits
 vhours
 R1
 R2
-!i10b 1
-!s100 1_6SSARRb_1I06;?Ri6Eg1
-IjZmg`Z8TlaOE?jI8D7F1<1
-R3
-!s105 hours_sv_unit
-S1
-R0
-w1528502481
-8hours.sv
-Fhours.sv
-L0 8
-R5
 r1
 !s85 0
 31
+!i10b 1
+!s100 zRkWc^RPbZ:=Ynm1Cl4]<0
+I7S@i_Z3`JnTnQkU[AbMI=2
+!s105 hours_sv_unit
+S1
+R0
+w1528504258
+8hours.sv
+Fhours.sv
+L0 8
+R4
+R5
 R6
 R7
-R8
 !i113 0
+R8
 R9
-R10
 vminutes
 R1
 R2
+r1
+!s85 0
+31
 !i10b 1
 !s100 =;I30_91z78Fif@]27=[U1
 IEFnVS]N32QQ_UOYNdmNad0
-R3
 !s105 minutes_sv_unit
 S1
 R0
@@ -120,47 +118,45 @@ w1528502025
 8minutes.sv
 Fminutes.sv
 L0 8
+R4
 R5
-r1
-!s85 0
-31
 R6
 R7
-R8
 !i113 0
+R8
 R9
-R10
 vseconds
 R1
 R2
-!i10b 1
-!s100 HAJa5Xaa42E30XzR6JcTb0
-I>GH`dKAdAL]hZ[]Aj??gG1
-R3
-!s105 seconds_sv_unit
-S1
-R0
-R4
-8seconds.sv
-Fseconds.sv
-L0 8
-R5
 r1
 !s85 0
 31
+!i10b 1
+!s100 HAJa5Xaa42E30XzR6JcTb0
+I>GH`dKAdAL]hZ[]Aj??gG1
+!s105 seconds_sv_unit
+S1
+R0
+R3
+8seconds.sv
+Fseconds.sv
+L0 8
+R4
+R5
 R6
 R7
-R8
 !i113 0
+R8
 R9
-R10
 vtb
 R1
 R2
+r1
+!s85 0
+31
 !i10b 1
 !s100 >3odF074IBVRU2G=?e49g1
 ID5?VnMQ`:HTDQ:8KRKCzF0
-R3
 !s105 tb_sv_unit
 S1
 R0
@@ -168,13 +164,10 @@ w1528491532
 8tb.sv
 Ftb.sv
 L0 8
+R4
 R5
-r1
-!s85 0
-31
 R6
 R7
-R8
 !i113 0
+R8
 R9
-R10

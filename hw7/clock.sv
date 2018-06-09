@@ -18,7 +18,6 @@ module clock (
        wire changeHour;             //connects minutes and hours modules
        wire amPm;                   //connects the hours and displayDigits modules
 
-       logic [4:0] hour;            //connects the hours and displayDigits modules
        logic [2:0] minMSB;          //connects the minutes and displayDigits modules MSB
        logic [3:0] minLSB;          //connects the minutes and displayDigits modules LSB
        logic [1:0] hourMSB;         //connects the hours and displayDigits modules MSB
@@ -63,7 +62,8 @@ module clock (
             .amPm             (amPm),
             .minMSB           (minMSB),
             .minLSB           (minLSB),
-            .hour             (hour),
+            .hourMSB          (hourMSB),
+            .hourLSB          (hourLSB),
             .segmentData      (segment_data),
             .digitSelect      (digit_select)
        );
