@@ -11,9 +11,11 @@ module hours (
       input                   milTime,
       input                   changeHour,
       output logic            amPm,
-      output logic [4:0]      hour
+      output logic [1:0]      hourMSB,
+      output logic [3:0]      hourLSB
       );
 
+      logic [4:0] hour;
       enum logic [3:0] {
             IDLE = 4'b0000,
             CHECKFORMAT = 4'b0001,

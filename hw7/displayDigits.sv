@@ -10,6 +10,8 @@ module displayDigits (
       input                   resetN,
       input                   amPm,
       input [5:0]             min,
+      input [2:0]             minMSB,
+      input [3:0]             minLSB,
       input [4:0]             hour,
       output logic [7:0]      segmentData,
       output logic [2:0]      digitSelect

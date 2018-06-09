@@ -19,7 +19,10 @@ module clock (
        wire amPm;                   //connects the hours and displayDigits modules
 
        logic [4:0] hour;            //connects the hours and displayDigits modules
-       logic [5:0] min;             //connects the minutes and displayDigits modules
+       logic [2:0] minMSB;          //connects the minutes and displayDigits modules MSB
+       logic [3:0] minLSB;          //connects the minutes and displayDigits modules LSB
+       logic [1:0] hourMSB;         //connects the hours and displayDigits modules MSB
+       logic [3:0] hourLSB;         //connects the hours and displayDigits modules LSB
 
        clkSync clkSync0(
             .clkSec          (clk_1sec),
@@ -40,7 +43,8 @@ module clock (
             .resetN           (reset_n),
             .changeMin        (changeMin),
             .changeHour       (changeHour),
-            .min              (min)
+            .minMSB           (minMSB),
+            .minLSB           (minLSB)
        );
 
        hours hours0(
@@ -49,14 +53,16 @@ module clock (
             .milTime          (mil_time),
             .changeHour       (changeHour),
             .amPm             (amPm),
-            .hour            (hour)
+            .hourMSB          (hourMSB),
+            .hourLSB          (hourLSB)
        );
 
        displayDigits displayDigits0(
             .clkMSec          (clk_1ms),
             .resetN           (reset_n),
             .amPm             (amPm),
-            .min              (min),
+            .minMSB           (minMSB),
+            .minLSB           (minLSB),
             .hour             (hour),
             .segmentData      (segment_data),
             .digitSelect      (digit_select)

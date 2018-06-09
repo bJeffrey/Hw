@@ -10,9 +10,11 @@ module minutes (
       input                   resetN,
       input                   changeMin,
       output logic            changeHour,
-      output logic [5:0]      min
+      output logic [2:0]      minMSB,
+      output logic [3:0]      minLSB
       );
 
+      logic [5:0] min;
       enum logic [2:0] {
             IDLE = 3'b000,
             CHECK = 3'b001,
@@ -49,16 +51,26 @@ module minutes (
                         end
                         RESETMINUTES: begin
                               min = 6'b0;
+                              minMSB = 3'b0;
+                              minLSB = 4'b0;
                               changeHour = 1'b1;
                               nextState = IDLE;
                         end
                         RESETCLOCK: begin
                               min = 6'b0;
+                              minMSB = 3'b0;
+                              minLSB = 4'b0;
                               changeHour = 1'b0;
                               nextState = IDLE;
                         end
                         INC: begin
                               min = min + 6'b1;
+                              if (minLSB == 4'd9) begin//lsb of the minutes has reached 9
+                                    minMSB = minMSB + 3'd1;
+                                    minLSB = 4'b0;
+                              end
+                              else
+                                    minLSB = minLSB + 4'd1;
                               nextState = IDLE;
                         end
                   endcase
